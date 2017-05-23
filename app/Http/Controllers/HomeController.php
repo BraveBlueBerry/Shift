@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Test;
+use App\Models\Test.php
 
 class HomeController extends Controller
 {
-    function index(){
-        $welkom = "Player One";
-
-        return view('home', compact('welkom'));
+    //
+    function index() {
+      $name = "Talitha";
+      return view('home', compact('name'));
     }
-    function example(){
-        return view('example');
+
+    function test() {
+      echo "hallooooo";
     }
 }
+
+?>

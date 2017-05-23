@@ -1,0 +1,84 @@
+
+html {
+  line-height:normal;
+}
+
+.container input {
+  width:100%;
+  margin:2px;
+  margin-bottom:5px;
+  padding:5px;
+}
+
+.container input.button {
+  padding:10px;
+}
+
+input[type=text], input[type=password] {
+  padding:8px;
+}
+
+.button {
+  padding:10px;
+  background-color:transparent;
+  width:130px;
+  text-align:center;
+  border:solid 2px #618EAA;
+  border-radius:3px;
+  margin:2px;
+  font-weight:600;
+  color:#5b5e60;
+}
+
+.button:hover {
+  background-color:#618EAA;
+  color:white;
+}
+
+.button.secondary {
+  background-color:transparent;
+  width:100px;
+  border:transparent;
+  color:#51778e;
+  font-weight:500;
+}
+
+.button.secondary:hover {
+  text-decoration:underline;
+}
+
+.button.tertiary {
+  background-color:#74AACC;
+  border:#B1D2E6;
+  color:white;
+  width:100%;
+}
+
+.button.tertiary:hover{
+  background-color:#618EAA;
+}
+.header {
+  background-color:white;
+  width:100%;
+  margin:0;
+  height:10%;
+  padding:15px;
+}
+
+body {
+  padding:0px;
+  margin:0px;
+  font-family:Verdana;
+}
+.sidenav {
+  background-color:#74AACC;
+  height:100%;
+  width:5%;
+  min-width:50px;
+  max-width:70px;
+}
+
+.container {
+  width:400px;
+  margin:30px;
+}
