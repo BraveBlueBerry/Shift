@@ -15,9 +15,9 @@ Route::get('/', ['as' => 'Home', 'uses' => 'HomeController@index']);
 
 # Routes for testing the style
 Route::get('/styletest', ['as' => 'Test', 'uses' => 'StyleController@index']);
-Route::get('/aanmelden', ['as' => 'Aanmelden', 'uses' => 'StyleController@aanmelden']);
-Route::get('/contact', ['as' => 'Contact', 'uses' => 'StyleController@contact']);
-Route::get('/home', ['as' => 'Home', 'uses' => 'StyleController@home']);
-Route::get('/inloggen', ['as' => 'Inloggen', 'uses' => 'StyleController@inloggen']);
+Route::get('/aanmelden', ['as' => 'aanmelden', 'uses' => 'StyleController@aanmelden']);
+Route::get('/contact', ['as' => 'contact', 'uses' => 'StyleController@contact']);
+Route::get('/home', ['as' => 'home', 'uses' => 'StyleController@home']);
+Route::get('/inloggen', ['as' => 'inloggen', 'uses' => 'StyleController@inloggen']);
 
 ?>

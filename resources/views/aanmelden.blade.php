@@ -1,20 +1,5 @@
 <html>
-<head>
-    <title>Aanmelden - Shift.nl</title>
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/css/uikit.min.css" />
-
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- UIkit JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit-icons.min.js"></script>
-
-    <!-- My CSS -->
-    <link rel="stylesheet" href="{{ URL::asset('css/stylesheet.css') }}"/>
-
-</head>
+@include('head', ['title' => 'Shift | Aanmelden'])
 <body>
   <!-- Header static pages -->
   <nav class="uk-navbar-container" uk-navbar>
@@ -25,12 +10,7 @@
       </ul>
     </div>
     <div class="uk-navbar-right">
-        <ul class="uk-navbar-nav">
-            <li class="uk-parent"><a href="">Home</a></li>
-            <li class="uk-active"><a href="">Aanmelden</a></li>
-            <li class="uk-parent"><a href="">Inloggen</a></li>
-            <li class="uk-parent"><a href="">Contact</a></li>
-        </ul>
+        @include('navigation')
     </div>
   </nav>
   <!-- Aanmelden container inclusief logo -->
