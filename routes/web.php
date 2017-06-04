@@ -19,4 +19,5 @@ Route::get('/aanmelden', ['as' => 'Aanmelden', 'uses' => 'StyleController@aanmel
 Route::get('/contact', ['as' => 'Contact', 'uses' => 'StyleController@contact']);
 Route::get('/home', ['as' => 'Home', 'uses' => 'StyleController@home']);
 Route::get('/inloggen', ['as' => 'Inloggen', 'uses' => 'StyleController@inloggen']);
+
 ?>
