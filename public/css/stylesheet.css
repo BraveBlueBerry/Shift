@@ -218,6 +218,7 @@ body {
 
 #navbarIcon {
   padding:0px;
+  color:white;
 }
 
 #navbarImage {
@@ -229,4 +230,19 @@ body {
 
 .navbarApp {
   background-color:#75aacc;
+  height:100vh;
+  width:75px;
+  float:left;
+}
+
+.navbarAppPlus {
+  background-color:#618EAA;
+  height:100vh;
+  width:200px;
+  float:left;
+}
+
+.icon {
+  margin:10px;
+  color:white;
 }
