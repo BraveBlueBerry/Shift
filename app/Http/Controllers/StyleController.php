@@ -26,6 +26,10 @@ class StyleController extends Controller
     function inloggen() {
       return view('static.inloggen');
     }
+
+    function landing() {
+      return view('application.landing');
+    }
 }
 
 ?>
