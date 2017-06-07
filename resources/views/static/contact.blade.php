@@ -1,5 +1,5 @@
 <html>
-@include('head', ['title' => 'Shift | Contact'])
+@include('static.parts.head', ['title' => 'Shift | Contact'])
 <body>
   <!-- Header static pages -->
   <nav class="uk-navbar-container" uk-navbar>
@@ -10,7 +10,7 @@
       </ul>
     </div>
     <div class="uk-navbar-right">
-        @include('navigation')
+        @include('static.parts.navigation')
     </div>
   </nav>
 

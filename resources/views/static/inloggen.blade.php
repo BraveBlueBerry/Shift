@@ -1,5 +1,5 @@
 <html>
-@include('head', ['title' => 'Shift | Inloggen'])
+@include('static.parts.head', ['title' => 'Shift | Inloggen'])
 <body>
   <!-- Header static pages -->
     <nav class="uk-navbar-container" uk-navbar>
@@ -10,7 +10,7 @@
         </ul>
       </div>
       <div class="uk-navbar-right">
-        @include('navigation')
+        @include('static.parts.navigation')
       </div>
     </nav>
     <!-- Inloggen container inclusief logo -->

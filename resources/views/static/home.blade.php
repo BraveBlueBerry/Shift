@@ -1,5 +1,5 @@
 <html>
-  @include('head')
+  @include('static.parts.head')
   <body>
 
     <!-- Header static pages -->
@@ -11,7 +11,7 @@
         </ul>
       </div>
       <div class="uk-navbar-right">
-        @include('navigation')
+        @include('static.parts.navigation')
       </div>
     </nav>
     <!-- Content page -->

@@ -12,19 +12,19 @@ class StyleController extends Controller
     }
 
     function aanmelden() {
-      return view('aanmelden');
+      return view('static.aanmelden');
     }
 
     function contact() {
-      return view('contact');
+      return view('static.contact');
     }
 
     function home() {
-      return view('home');
+      return view('static.home');
     }
 
     function inloggen() {
-      return view('inloggen');
+      return view('static.inloggen');
     }
 }
 
