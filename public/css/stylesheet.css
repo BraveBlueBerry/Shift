@@ -218,7 +218,12 @@ body {
 
 #navbarIcon {
   padding:0px;
+  margin:10px;
   color:white;
+}
+
+#navbarIcon:hover {
+  color:#abc0cd;
 }
 
 #navbarImage {
@@ -227,22 +232,30 @@ body {
   height:50px;
   margin-bottom:10px;
 }
-
-.navbarApp {
+.navbar {
+  height:100vh;
+  float:left;
+}
+#navbarApp {
   background-color:#75aacc;
-  height:100vh;
   width:75px;
-  float:left;
 }
 
-.navbarAppPlus {
+#navbarPlus {
   background-color:#618EAA;
-  height:100vh;
   width:200px;
-  float:left;
 }
 
-.icon {
-  margin:10px;
-  color:white;
+#navbarText {
+  background-color:#B1D2E6;
+  width:200px;
+}
+
+#welkomText {
+  padding-top:20px;
+}
+
+#check {
+  margin-top:30px;
+  margin-bottom:30px;
 }

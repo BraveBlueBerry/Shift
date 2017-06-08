@@ -14,6 +14,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit-icons.min.js"></script>
 
+  <!-- Font Awesome -->
+  <script src="https://use.fontawesome.com/4ec36e4a13.js"></script>
+
   <!-- My CSS -->
   <link rel="stylesheet" href="{{ URL::asset('css/stylesheet.css') }}"/>
 </head>
