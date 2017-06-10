@@ -30,6 +30,10 @@ class StyleController extends Controller
     function landing() {
       return view('application.landing');
     }
+
+    function overzicht() {
+      return view('application.overzicht');
+    }
 }
 
 ?>
