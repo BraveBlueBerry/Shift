@@ -1,13 +1,5 @@
-<html>
-  @include('application.parts.head', ['title' => 'Shift | Welkom'])
-  <body>
-    <div id="pagebb">
-      <div id="adg3navbb">
-        @include('application.parts.navigation')
-        @include('application.parts.navigationText')
-      </div>
-      <div id="wrapperbb">
-        <div id="contentbb">
+
+        <div id="contentbb2">
           <div class="uk-text-lead headText app-headerbb">Overzicht uren</div>
           <div class="page-panelbb">
             <div class="page-panel-innerbb">
@@ -56,7 +48,3 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </body>
-</html>

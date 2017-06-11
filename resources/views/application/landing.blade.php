@@ -29,7 +29,28 @@
             </div>
           </div>
         </div>
+          @include('application.overzicht')
       </div>
     </div>
   </body>
+  <script>
+      $(function() {
+          $("#contentbb").hide();
+          $("#contentbb2").hide();
+      });
+
+      $(function(){
+          $('.knop1').click(function() {
+              $("#contentbb").hide();
+              $("#contentbb2").show();
+          });
+      });
+
+    $(function(){
+        $('.knop2').click(function() {
+            $("#contentbb2").hide();
+            $("#contentbb").show();
+        });
+    });
+  </script>
 </html>
