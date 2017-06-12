@@ -16,11 +16,11 @@
     table#t01 tr:nth-child(odd) {
         background-color:#fff;
     }
-    /*table#t01 td:nth-child(5) {*/
-        /*color: blue;*/
-    /*}*/
+    table#t01 td:nth-child(5) {
+        text-align: center;
+    }
     table#t01 th {
-        background-color:#F3BEFA;
+        background-color:#D7DAF7;
     }
 </style>
 

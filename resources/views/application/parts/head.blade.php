@@ -19,4 +19,10 @@
 
   <!-- My CSS -->
   <link rel="stylesheet" href="{{ URL::asset('css/stylesheet.css') }}"/>
+
+  <!-- CSS for table -->
+  <link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}"/>
+  <link rel="stylesheet" href="{{ URL::asset('css/demo.css') }}"/>
+  <link rel="stylesheet" href="{{ URL::asset('css/component.css') }}"/>
+
 </head>

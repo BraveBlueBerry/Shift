@@ -40,7 +40,7 @@
 
                             </div>
                             <br/> <br/> <br/>
-                            @include('application.parts.table')
+                            @include('application.table.table')
                         </form>
                     </div>
                 </div>
