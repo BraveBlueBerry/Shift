@@ -5,7 +5,7 @@
             <div class="page-panel-contentbb maskablebb" id="dashboard-containerbb">
                 <div id="dashboard-overviewbb" class="dashboard-sectionbb">
                     <div class="dashboard-overviewbb">
-                        <form class="uk-form-horizontal uk-margin-large">
+                        <form class="uk-form-horizontal uk-margin-large" style="width: 100%;">
                             <div class="uk-margin">
 
                                 <div class="left">
@@ -22,7 +22,6 @@
                                             <option>Afgelopen maand</option>
                                         </select>
                                     </div>
-
                                 </div>
                                 <div class="right" style="margin-left:20px;">
 
@@ -40,6 +39,8 @@
                                 </div>
 
                             </div>
+                            <br/> <br/> <br/>
+                            @include('application.parts.table')
                         </form>
                     </div>
                 </div>
