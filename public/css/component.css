@@ -39,16 +39,16 @@ td, th {
 	}
 th {
 	/*aanpassen eerste laag*/
-	background-color: #78819a;
+	background-color: # #75aacc;
     font-weight: bold;
     color: #fff;
     white-space: nowrap;
 }
 tbody th {
-	background-color: #a9e6f3;
+	/*aanpassen tweede laag*/
+	background-color: #B1D2E6;
 }
 tbody tr:nth-child(2n-1) {
-	/*aanpassen tweede laag*/
 	background-color: #f5f5f5;
     transition: all .125s ease-in-out;
 }
