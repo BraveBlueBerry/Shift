@@ -40,6 +40,7 @@
 
                             </div>
                             <br/> <br/> <br/>
+<!--                            tabel import-->
                             @include('application.table.table')
                         </form>
                     </div>

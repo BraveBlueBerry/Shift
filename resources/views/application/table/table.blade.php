@@ -1,3 +1,10 @@
+<!--
+Het formaat van de table is erg simpel.
+De thead is eigenlijk de eerste rij, en de tbody zijn alle overige rijen.
+Let bij de thead op dat je de eerste rij in TD doet, omdat hij anders niet het effect mee neemt.
+
+Style can be edited in component.css
+-->
 <table>
     <thead>
     <tr>
