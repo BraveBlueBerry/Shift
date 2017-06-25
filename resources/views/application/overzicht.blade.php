@@ -37,10 +37,9 @@
                                     </div>
 
                                 </div>
-
                             </div>
                             <br/> <br/> <br/>
-<!--                            tabel import-->
+                            <!-- tabel import-->
                             @include('application.table.table')
                         </form>
                     </div>

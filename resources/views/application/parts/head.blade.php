@@ -14,15 +14,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit-icons.min.js"></script>
 
+  <!-- My JS -->
+  <script src="{{ URL::asset('js/toggleOverzichten.js') }}"></script>
+
   <!-- Font Awesome -->
   <script src="https://use.fontawesome.com/4ec36e4a13.js"></script>
 
+  <!-- CSS for table -->
+  <link rel="stylesheet" href="{{ URL::asset('css/component.css') }}"/>
+
   <!-- My CSS -->
   <link rel="stylesheet" href="{{ URL::asset('css/stylesheet.css') }}"/>
-
-  <!-- CSS for table -->
-  <link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}"/>
-  <link rel="stylesheet" href="{{ URL::asset('css/demo.css') }}"/>
-  <link rel="stylesheet" href="{{ URL::asset('css/component.css') }}"/>
 
 </head>
