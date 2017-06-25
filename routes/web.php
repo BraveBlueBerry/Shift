@@ -19,6 +19,9 @@ Route::get('/aanmelden', ['as' => 'aanmelden', 'uses' => 'StyleController@aanmel
 Route::get('/contact', ['as' => 'contact', 'uses' => 'StyleController@contact']);
 Route::get('/home', ['as' => 'home', 'uses' => 'StyleController@home']);
 Route::get('/inloggen', ['as' => 'inloggen', 'uses' => 'StyleController@inloggen']);
-Route::get('/landing', ['as' => 'landing', 'uses' => 'StyleController@landing']);
-Route::get('/overzicht', ['as' => 'overzicht', 'uses' => 'StyleController@overzicht']);
+Route::group(['middleware' => ['session']], function(){
+    Route::get('/landing', ['as' => 'landing', 'uses' => 'StyleController@landing']);
+    Route::get('/overzicht', ['as' => 'overzicht', 'uses' => 'StyleController@overzicht']);
+});
+
 ?>

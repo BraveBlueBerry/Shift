@@ -14,7 +14,7 @@ class HomeController extends Controller
     }
 
     function test() {
-      echo "hallooooo";
+      return view("api_test");
     }
 }
 

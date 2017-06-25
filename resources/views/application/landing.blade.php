@@ -8,7 +8,7 @@
       </div>
       <div id="wrapperbb">
         <div id="contentbb">
-          <div class="uk-text-lead headText app-headerbb">Welkom gebruiker</div>
+          <div class="uk-text-lead headText app-headerbb">Welkom {{$user->first_name}}</div>
           <div class="page-panelbb">
             <div class="page-panel-innerbb">
               <div class="page-panel-contentbb maskablebb" id="dashboard-containerbb">
