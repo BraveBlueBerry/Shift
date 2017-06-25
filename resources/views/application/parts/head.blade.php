@@ -19,10 +19,15 @@
 
   <!-- My JS -->
   <script src="{{ URL::asset('js/toggleMenus.js') }}"></script>
+  <script src="{{ URL::asset('js/toggleOverzichten.js') }}"></script>
 
   <!-- Font Awesome -->
   <script src="https://use.fontawesome.com/4ec36e4a13.js"></script>
 
+  <!-- CSS for table -->
+  <link rel="stylesheet" href="{{ URL::asset('css/component.css') }}"/>
+
   <!-- My CSS -->
   <link rel="stylesheet" href="{{ URL::asset('css/stylesheet.css') }}"/>
+
 </head>

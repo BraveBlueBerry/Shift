@@ -216,14 +216,14 @@ body {
   float:right;
 }
 
-#navbarIcon {
-  padding:0px;
-  margin:10px;
-  color:white;
+.navbarIcon {
+  padding:0px !important;
+  margin:10px !important;
+  color:white !important;
 }
 
-#navbarIcon:hover {
-  color:#abc0cd;
+.navbarIcon:hover {
+  color:#abc0cd !important;
   cursor:pointer;
 }
 

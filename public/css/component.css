@@ -1,0 +1,70 @@
+/**
+Component styles for table
+ */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+/**
+Setups the size of the table
+ */
+table {
+	border-collapse: collapse;
+	margin-bottom: 3em;
+	width: 100%;
+	background: #fff;
+}
+
+/**
+Setups the size of the columns.
+ */
+td, th {
+	padding: 0.75em 1.5em;
+	text-align: left;
+}
+td.err {
+	background-color: #e38fb4;
+	color: #fff;
+	font-size: 0.75em;
+	text-align: center;
+	line-height: 1;
+}
+
+/**
+Change color of the header layer (Alle titels dus)
+ */
+th {
+	background-color: #75aacc;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/**
+Change color of the TH layers (Dit is dus onder datum)
+ */
+tbody th {
+	background-color: #B1D2E6;
+}
+
+/**
+Makes each row show a slightly different color
+ */
+tbody tr:nth-child(2n-1) {
+	background-color: #f5f5f5;
+	transition: all .125s ease-in-out;
+}
+
+/**
+Hover effect
+ */
+tbody tr:hover {
+    background-color: rgba(196, 199, 208, 0.3);
+}
+
+/**
+Font Setup
+ */
+body {
+	font-family: 'Lato', Arial, sans-serif;
+	color: #7c8d87;
+	background: #f8f8f8;
+}
