@@ -224,6 +224,7 @@ body {
 
 #navbarIcon:hover {
   color:#abc0cd;
+  cursor:pointer;
 }
 
 #navbarImage {
@@ -239,11 +240,25 @@ body {
 #navbarApp {
   background-color:#75aacc;
   width:75px;
+  z-index: 900;
 }
 
 #navbarPlus {
-  background-color:#618EAA;
+  background-color:#73CD98;
   width:200px;
+  left:-200px;
+  position:absolute;
+  margin-left:80px;
+  display:none;
+}
+
+#navbarUser{
+    background-color:#8573CC;
+    width:200px;
+    left:-200px;
+    position:absolute;
+    margin-left:80px;
+    display:none;
 }
 
 #navbarText {
