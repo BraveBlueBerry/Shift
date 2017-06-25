@@ -15,7 +15,6 @@
         </div>
     </nav>
     <script>
-    console.log('we"re here');
     var app = angular.module('loginForm', []);
     app.controller('loginCtrl', function($scope, $http) {
         $scope.email = '';

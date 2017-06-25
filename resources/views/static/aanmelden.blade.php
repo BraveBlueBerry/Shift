@@ -14,30 +14,55 @@
     </div>
   </nav>
   <!-- Aanmelden container inclusief logo -->
+  <script>
+  var app = angular.module('newAccountForm', []);
+  app.controller('accountCtrl', function($scope, $http) {
+      $scope.first_name = '';
+      $scope.pass1 = '';
+      $scope.last_name = '';
+      $scope.email = '';
+      $scope.pass2 = '';
+      $scope.createSubmit = function(event) {
+
+          $http({
+              method  :   "POST",
+              url     :   "{{env('API_HOST')}}/user",
+              data    :   { fn: $scope.first_name,
+                            ln: $scope.last_name,
+                            email: $scope.email,
+                            pass1: $scope.pass1,
+                            pass2: $scope.pass2}
+          }).then(function(response) {
+              //$scope.myData = response.data.records;
+              window.location = "/inloggen";
+          });
+      }
+  });
+  </script>
   <div class="uk-vertical-align uk-text-center uk-height-1-1">
-      <div class="uk-vertical-align-middle container">
+      <div class="uk-vertical-align-middle container" ng-app="newAccountForm" ng-controller="accountCtrl">
           <img class="uk-margin-bottom" width="140" height="120" src="{{url('storage/logo.png')}}" alt="">
           <center>
             <h4>Maak een account aan voor Shift</h4>
           </center>
-          <form class="uk-panel uk-panel-box uk-form aanmelden">
+          <form ng-submit='createSubmit()' class="uk-panel uk-panel-box uk-form aanmelden">
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="text" placeholder="Voornaam">
+                  <input class="uk-width-1-1 uk-form-default" type="text" ng-model='first_name' placeholder="Voornaam">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="text" placeholder="Achternaam">
+                  <input class="uk-width-1-1 uk-form-default" type="text" ng-model='last_name' placeholder="Achternaam">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="text" placeholder="E-mail">
+                  <input class="uk-width-1-1 uk-form-default" type="text" ng-model='email' placeholder="E-mail">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="password" placeholder="Wachtwoord">
+                  <input class="uk-width-1-1 uk-form-default" type="password" ng-model='pass1' placeholder="Wachtwoord">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="password" placeholder="Wachtwoord opnieuw">
+                  <input class="uk-width-1-1 uk-form-default" type="password" ng-model='pass2' placeholder="Wachtwoord opnieuw">
               </div>
               <div class="uk-form-row">
-                  <a class="uk-width-1-1 button tertiary" href="#">Registreer</a>
+                  <input type='submit' class="uk-width-1-1 button tertiary" value='Registreer' />
               </div>
           </form>
       </div>
