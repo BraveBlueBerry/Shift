@@ -13,6 +13,8 @@
           @include('application.overzicht')
           @include('application.teams')
           @include('application.maak_uur')
+          @include('application.maak_cat')
+          @include('application.maak_team')
       </div>
     </div>
   </body>

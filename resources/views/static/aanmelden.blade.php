@@ -13,7 +13,6 @@
         @include('static.parts.navigation')
     </div>
   </nav>
-  <!-- Aanmelden container inclusief logo -->
   <script>
   var app = angular.module('newAccountForm', []);
   app.controller('accountCtrl', function($scope, $http) {
@@ -27,8 +26,8 @@
           $http({
               method  :   "POST",
               url     :   "{{env('API_HOST')}}/user",
-              data    :   { fn: $scope.first_name,
-                            ln: $scope.last_name,
+              data    :   { first_name: $scope.first_name,
+                            last_name: $scope.last_name,
                             email: $scope.email,
                             pass1: $scope.pass1,
                             pass2: $scope.pass2}
@@ -39,6 +38,7 @@
       }
   });
   </script>
+  <!-- Aanmelden container inclusief logo -->
   <div class="uk-vertical-align uk-text-center uk-height-1-1">
       <div class="uk-vertical-align-middle container" ng-app="newAccountForm" ng-controller="accountCtrl">
           <img class="uk-margin-bottom" width="140" height="120" src="{{url('storage/logo.png')}}" alt="">

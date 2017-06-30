@@ -6,7 +6,7 @@
                 <div id="dashboard-overviewbb" class="dashboard-sectionbb">
                     <div class="dashboard-overviewbb">
                         <section class="dashboard-left-content">
-                            <i class="fa fa-users fa-5x" ></i> <br/> <br/>
+                            <i class="fa fa-users fa-5x" style="margin-top:100px;"></i> <br/> <br/>
                             Welkom op de team pagina!
                         </section>
                         <section class="dashboard-right-content">
