@@ -24,6 +24,10 @@ html {
     box-sizing: border-box;
 }
 
+#wachtwoord_gebruiker{
+    border:none;
+}
+
 .button {
   padding:15px 10px;
   background-color:transparent;
@@ -391,4 +395,14 @@ body {
 
 .content_right {
     display:none;
+}
+
+#form-account {
+    text-align:left;
+    margin-left:50px;
+    margin-top:50px;
+}
+
+#submit-button {
+    text-transform:none;
 }

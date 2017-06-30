@@ -14,8 +14,8 @@ jQuery(document).ready(function(){
     } else {
         jQuery("#content_landing").show();
     }
-    
-    jQuery('.navbarIcon').click(function() {
+
+    jQuery('.navbarIcon, .navbarLink').click(function() {
       jQuery(".content_right").hide();
       var content = "#content_" + (jQuery(this).attr("href")).substring(1);
       jQuery(content).show();

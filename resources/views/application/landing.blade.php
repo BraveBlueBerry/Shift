@@ -15,6 +15,9 @@
           @include('application.maak_uur')
           @include('application.maak_cat')
           @include('application.maak_team')
+          @include('application.account')
+          @include('application.instellingen')
+          @include('application.wijzig_ww')
       </div>
     </div>
   </body>

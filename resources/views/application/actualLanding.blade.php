@@ -12,7 +12,7 @@
                         <section class="dashboard-right-content">
                             <img class="uk-align-center" width="180" height="165" src="{{url('storage/logozwartwit.png')}}" alt="">
                             Gelijk een registratie toevoegen?
-                            <a href="#">Dat kan hier</a>
+                            <a class="navbarLink" href="#maakuur">Dat kan hier</a>
                         </section>
                     </div>
                 </div>
