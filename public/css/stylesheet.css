@@ -406,3 +406,26 @@ body {
 #submit-button {
     text-transform:none;
 }
+
+#filter-controls {
+    margin-left:100px;
+}
+
+#filter-label {
+    width:100px;
+}
+
+#filter-button {
+    margin-left:60px;
+}
+
+.truncate {
+max-width:200px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+#tabel-teams {
+    margin-left:30px;
+}

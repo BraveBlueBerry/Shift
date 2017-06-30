@@ -4,45 +4,55 @@
         <div class="page-panel-innerbb">
             <div class="page-panel-content maskablebb" id="dashboard-containerbb">
                 <div id="dashboard-overviewbb" class="dashboard-sectionbb">
-                    <div class="dashboard-overviewbb">
-                        <form class="uk-form-horizontal uk-margin-large" style="width: 100%;">
-                            <div class="uk-margin">
-
-                                <div class="left">
-
-                                    <label class="uk-form-label" for="form-horizontal-select">Wanneer </label>
-                                    <div class="uk-form-controls">
-                                        <select class="uk-select" id="form-horizontal-select">
-                                            <!-- Deze opties staan niet vast, misschien moeten we juist data kiezen die gebruikt zijn in de geregistreerde uren
-                                                  Datepicker van maken met opties "van" en "tot" -->
-                                            <option>Alles</option>
-                                            <option>Vandaag</option>
-                                            <option>Afgelopen week</option>
-                                            <option>Afgelopen 2 weken</option>
-                                            <option>Afgelopen maand</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="right" style="margin-left:20px;">
-
-                                    <label class="uk-form-label" for="form-horizontal-select">Categorie</label>
-                                    <div class="uk-form-controls">
-                                        <select class="uk-select" id="form-horizontal-select">
-                                            <!-- Deze opties staan niet vast, moet samengaan met de categoriën die de gebruiker aangemaakt heeft -->
-                                            <option>Alles</option>
-                                            <option>Blauw</option>
-                                            <option>Groen</option>
-                                            <option>Zwart</option>
-                                        </select>
-                                    </div>
-
+                    <form class="uk-form-horizontal" style="width: 100%; margin-bottom:10px;">
+                        <div class="uk-grid">
+                            <div class="uk-width-1-4">
+                                <label id="filter-label" class="uk-form-label" for="sort_wnnr">Wanneer </label>
+                                <div id="filter-controls" class="uk-form-controls">
+                                    <select class="uk-select" id="sort_wnnr">
+                                        <!-- Deze opties staan niet vast, misschien moeten we juist data kiezen die gebruikt zijn in de geregistreerde uren
+                                              Datepicker van maken met opties "van" en "tot" -->
+                                        <option>Alles</option>
+                                        <option>Vandaag</option>
+                                        <option>Afgelopen week</option>
+                                        <option>Afgelopen 2 weken</option>
+                                        <option>Afgelopen maand</option>
+                                    </select>
                                 </div>
                             </div>
-                            <br/> <br/> <br/>
-                            <!-- tabel import-->
-                            @include('application.table.table')
-                        </form>
-                    </div>
+                            <div class="uk-width-1-4">
+                                <label id="filter-label" class="uk-form-label" for="sort_cat">Categorie</label>
+                                <div id="filter-controls" class="uk-form-controls">
+                                    <select class="uk-select" id="sort_cat">
+                                        <!-- Deze opties staan niet vast, moet samengaan met de categoriën die de gebruiker aangemaakt heeft -->
+                                        <option>Alles</option>
+                                        <option>Blauw</option>
+                                        <option>Groen</option>
+                                        <option>Zwart</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-4">
+                                <div class="uk-margin">
+                                    <label id="filter-label" class="uk-form-label" for="sort_team">Team</label>
+                                    <div id="filter-controls" class="uk-form-controls">
+                                        <select id="sort_team" class="uk-select uk-form-width-large">
+                                            <!-- Deze opties staan niet vast, moet samengaan met de teams waar de gebruiker in zit -->
+                                            <option>Categorie 01</option>
+                                            <option>Categorie 02</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-4">
+                                <div class="uk-margin" >
+                                    <button id="filter-button" class="uk-button uk-button-default">Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- tabel import-->
+                    @include('application.table.table_uren')
                 </div>
             </div>
         </div>
