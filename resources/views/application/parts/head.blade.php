@@ -18,8 +18,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit-icons.min.js"></script>
 
   <!-- My JS -->
-  <script src="{{ URL::asset('js/toggleMenus.js') }}"></script>
-  <script src="{{ URL::asset('js/toggleOverzichten.js') }}"></script>
+  <script src="{{ URL::asset('js/toggle_menus.js') }}"></script>
+  <script src="{{ URL::asset('js/toggle_application.js') }}"></script>
 
   <!-- Font Awesome -->
   <script src="https://use.fontawesome.com/4ec36e4a13.js"></script>

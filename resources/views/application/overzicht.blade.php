@@ -1,8 +1,8 @@
-<div id="contentbb_overzicht">
+<div id="content_overzicht" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Overzicht uren</div>
     <div class="page-panelbb">
         <div class="page-panel-innerbb">
-            <div class="page-panel-contentbb maskablebb" id="dashboard-containerbb">
+            <div class="page-panel-content maskablebb" id="dashboard-containerbb">
                 <div id="dashboard-overviewbb" class="dashboard-sectionbb">
                     <div class="dashboard-overviewbb">
                         <form class="uk-form-horizontal uk-margin-large" style="width: 100%;">

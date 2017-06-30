@@ -216,13 +216,13 @@ body {
   float:right;
 }
 
-.navbarIcon {
+.navbarIcon, .menuIcon {
   padding:0px !important;
   margin:10px !important;
   color:white !important;
 }
 
-.navbarIcon:hover {
+.navbarIcon:hover, .menuIcon:hover {
   color:#abc0cd !important;
   cursor:pointer;
 }
@@ -296,7 +296,7 @@ body {
   overflow-y:scroll;
 }
 
-#contentbb {
+#content {
   clear:both;
   position:relative;
   box-sizing:border-box;
@@ -350,7 +350,7 @@ body {
   padding-bottom:0;
 }
 
-.page-panel-contentbb {
+.page-panel-content {
   padding-bottom:60px;
   box-sizing:border-box;
   display:table-cell;
@@ -377,18 +377,22 @@ body {
   min-height:400px;
 }
 
-.dashboard-left-contentbb {
+.dashboard-left-content {
   flex:0 0 350px;
   text-align:center;
   display:block;
   padding-right:10px;
 }
 
-.dashboard-right-contentbb {
+.dashboard-right-content {
   flex:1;
   text-align:center;
   box-sizing:border-box;
   border-left:1px solid #ccc;
   overflow:hidden;
   display:block;
+}
+
+.content_right {
+    display:none;
 }
