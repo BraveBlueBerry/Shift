@@ -44,13 +44,13 @@
             </center>
             <form  ng-submit='loginSubmit()' class="uk-panel uk-panel-box uk-form" style="background: #F0F0F0; border-radius: 10px;">
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="text" ng-model='email' placeholder="E-mail">
+                  <input  id="input_static" class="uk-width-1-1 uk-form-default" type="text" ng-model='email' placeholder="E-mail">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="password" ng-model='password' placeholder="Wachtwoord">
+                  <input  id="input_static" class="uk-width-1-1 uk-form-default" type="password" ng-model='password' placeholder="Wachtwoord">
               </div>
               <div class="uk-form-row">
-                  <input type='submit' class="uk-width-1-1 button tertiary" value='Login' />
+                  <input  id="input_static" type='submit' class="uk-width-1-1 button tertiary" value='Login' />
               </div>
                 <div class="uk-form-row uk-text-small">
                     <label class="uk-float-left" id="rememberMe"><input id="checkbox" type="checkbox">Remember me</label>

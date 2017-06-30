@@ -47,22 +47,22 @@
           </center>
           <form ng-submit='createSubmit()' class="uk-panel uk-panel-box uk-form aanmelden">
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="text" ng-model='first_name' placeholder="Voornaam">
+                  <input  id="input_static" class="uk-width-1-1 uk-form-default" type="text" ng-model='first_name' placeholder="Voornaam">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="text" ng-model='last_name' placeholder="Achternaam">
+                  <input  id="input_static" class="uk-width-1-1 uk-form-default" type="text" ng-model='last_name' placeholder="Achternaam">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="text" ng-model='email' placeholder="E-mail">
+                  <input  id="input_static" class="uk-width-1-1 uk-form-default" type="text" ng-model='email' placeholder="E-mail">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="password" ng-model='pass1' placeholder="Wachtwoord">
+                  <input  id="input_static" class="uk-width-1-1 uk-form-default" type="password" ng-model='pass1' placeholder="Wachtwoord">
               </div>
               <div class="uk-form-row">
-                  <input class="uk-width-1-1 uk-form-default" type="password" ng-model='pass2' placeholder="Wachtwoord opnieuw">
+                  <input  id="input_static" class="uk-width-1-1 uk-form-default" type="password" ng-model='pass2' placeholder="Wachtwoord opnieuw">
               </div>
               <div class="uk-form-row">
-                  <input type='submit' class="uk-width-1-1 button tertiary" value='Registreer' />
+                  <input  id="input_static" type='submit' class="uk-width-1-1 button tertiary" value='Registreer' />
               </div>
           </form>
       </div>

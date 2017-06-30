@@ -14,18 +14,14 @@ html {
   padding:10px;
 }
 
-input[type=text], input[type=password], .form textarea {
-  width: 90%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-textarea {
-  height:150px;
-  margin-left:15px;
+#input_static {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .button {
