@@ -33,10 +33,10 @@ class TokenController extends APIController
             return response()->json([], 404);
         }
     }
-    public function read($id){
-        $token = Token::where('token', '=', $id)->first();
+    public function read($token){
+        $token = Token::where('token', '=', $token)->first();
         if(isset($token))
-            return response()->json([$token], 200);
+            return response()->json($token, 200);
         return response()->json([], 404);
     }
     public function delete(Request $request){

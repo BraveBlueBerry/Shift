@@ -32,19 +32,19 @@ class CategoryController extends APIController
         $category->save();
         return response()->json([], 200);
     }
-    public function read($id){
+    public function read(Request $request, $id){
 
     }
     public function readAllTeam($team_id){
 
     }
-    public function readAll(){
+    public function readAll(Request $request){
 
     }
     public function update(Request $request, $id){
 
     }
-    public function delete($id){
+    public function delete(Request $request, $id){
 
     }
 }

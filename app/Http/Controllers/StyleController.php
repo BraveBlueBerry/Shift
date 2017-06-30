@@ -31,18 +31,30 @@ class StyleController extends Controller
     }
 
     function landing() {
-      if(isset($_COOKIE['token'])){
-          $token = Token::where('token', '=', $_COOKIE['token'])->first();
-          if(!isset($token)){
-              // redirect naar inloggen
-              return redirect('inloggen');
-          }
-          $user = User::where('id','=',$token->user)->first();
-      }
-      else{
-          return redirect('inloggen');
-      }
-      return view('application.landing', compact('user'));
+        if(isset($_COOKIE['token'])){
+            $url = env('API_HOST') . '/token/' . $_COOKIE['token'];
+
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+            $res = curl_exec($ch);
+            $token = json_decode($res);
+            if(!isset($token->token)){
+                // redirect naar inloggen
+                return redirect('inloggen');
+            }
+            $url = env('API_HOST') . '/user/' . $token->user;
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['token: ' . $token->token]);
+            $res = curl_exec($ch);
+            $user = json_decode($res);
+        }
+        else{
+            return redirect('inloggen');
+        }
+        return view('application.landing', compact('user'));
     }
 
     function overzicht() {
