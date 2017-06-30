@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    //
+    public $timestamps = false;
+    public function members()
+    {
+        return $this->belongsToMany('App\Models\User', 'team_user', 'team', 'user');
+    }
 }

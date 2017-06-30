@@ -52,6 +52,8 @@ Route::get('/category', ['as' => 'get_categories', 'uses' => 'CategoryController
 Route::put('/category/{id}', ['as' => 'put_category', 'uses' => 'CategoryController@update']);
 Route::post('/category', ['as' => 'post_category', 'uses' => 'CategoryController@create']);
 Route::delete('/category/{id}', ['as' => 'delete_category', 'uses' => 'CategoryController@delete']);
+Route::get('/team/{team_id}/category', ['as' => 'get_categories_for_team', 'uses' => 'CategoryController@readAllTeam']);
+Route::post('/team/{team_id}/category', ['as' => 'post_categories_for_team', 'uses' => 'CategoryController@createForTeam']);
 
 /* REGISTRATIONS */
 Route::get('/registration/{id}', ['as' => 'get_registration', 'uses' => 'RegistrationController@read']);

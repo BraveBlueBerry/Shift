@@ -7,15 +7,13 @@ use App\Models\User;
 use App\Models\Token;
 use Hash;
 
-class TokenController extends Controller
+class TokenController extends APIController
 {
     public function create(Request $request){
         $isset = ['user', 'password'];
-        foreach($isset as $check){
-            if(!isset($request->{$check})){
-                return response()->json([], 404);
-            }
-        }
+        if(!$this->fieldsSet($isset, $request))
+            return response()->json([], 404);
+
         $user = User::where('email','=',$request->user)->first();
         if(!isset($user)){
             // User doesn't even exist, actual 404
@@ -42,6 +40,11 @@ class TokenController extends Controller
         return response()->json([], 404);
     }
     public function delete(Request $request){
-
+        $header = ['token'];
+        if(!$this->fieldsSet($isset, $request, 'header'))
+            return response()->json([], 404);
+        $token = Token::where('token','=',$request->header('token'))->first();
+        $token->delete();
+        return response()->json([], 200);
     }
 }
