@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Team;
+use App\Models\Category;
+use App\Models\Invitation;
+use App\Models\Registration;
 
 class TeamController extends APIController
 {
@@ -55,6 +58,8 @@ class TeamController extends APIController
         if(!$user)
             return response()->json(error("No user for this token"), 401);
         $team = Team::where('id', '=', $id)->first();
+        if(!$team)
+            return response()->json(error("Team not found"), 404);
         if($team->owner != $user->id){
             return response()->json(error("User associated with token can't access resource"), 403);
         }
@@ -63,10 +68,38 @@ class TeamController extends APIController
         $this->updateModelFromRequest($accepted, $team, $request);
         return response()->json([], 200);
     }
-    //TODO
     public function delete(Request $request, $id){
         $user = $this->getUserByToken($request->header('token'));
         if(!$user)
             return response()->json(error("No user for this token"), 401);
+        $team = Team::where('id','=',$id)->first();
+        if(!$team)
+            return response()->json(error("Team not found"), 404);
+        if($user->id != $team->owner)
+            return response()->json(error("User is not the owner"), 405);
+
+        // Detach everything
+        // Members
+        $members = $team->members()->pluck('id')->toArray();
+        $team->members()->detach($members);
+        // Registrations
+        $registrations = Registration::where('team','=',$id)->get();
+        foreach($registrations as $registration){
+            $registration->team = null;
+            $registration->save();
+        }
+        // Invitations
+        $invitations = Invitation::where('team','=',$id)->get();
+        foreach($invitations as $i){
+            $i->delete();
+        }
+        // Categories
+        $categories = Category::where('team','=',$id)->get();
+        foreach($categories as $c){
+            $c->team = null;
+            $c->save();
+        }
+        $team->delete();
+        return response()->json([], 200);
     }
 }

@@ -43,6 +43,23 @@ class InvitationController extends APIController
         return response()->json($user->invitations->toArray(), 200);
     }
     public function delete(Request $request, $id){
+        $isset = ['response'];
+        $user = $this->getUserByToken($request->header('token'));
+        if(!$user)
+            return response()->json(error("No user for this token"), 401);
+        $invitation = Invitation::where('id','=',$id)->where('user','=',$user->id)->first();
+        if(!$invitation)
+            return response()->json(error("Invitation doesn't exist."), 404);
+        if(!$this->fieldsSet($isset, $request))
+            return response()->json(error("Fields missing: 'response' must be set."), 400);
+        if(!in_array($request->response, ['accept', 'decline']))
+            return response()->json(error("Response must be 'accept' or 'decline'."), 400);
 
+        if($request->response == 'accept'){
+            $invitation->team_object->members()->attach($user);
+        }
+
+        $invitation->delete();
+        return response()->json([], 200);
     }
 }
