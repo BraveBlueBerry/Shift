@@ -43,8 +43,13 @@ Route::post('/team', ['as' => 'post_team', 'uses' => 'TeamController@create']);
 Route::delete('/team/{id}', ['as' => 'delete_team', 'uses' => 'TeamController@delete']);
 
 /* MEMBERS */
-Route::get('/member', ['as' => 'get_members', 'uses' => 'MemberController@readAll']);
-Route::delete('/member/{id}', ['as' => 'delete_member', 'uses' => 'MemberController@delete']);
+Route::get('/team/{team_id}/member', ['as' => 'get_members', 'uses' => 'MemberController@readAll']);
+Route::delete('/team/{team_id}/member/{user_id}', ['as' => 'delete_member', 'uses' => 'MemberController@delete']);
+
+/* INVITATIONS */
+Route::post('/invitation', ['as' => 'post_invitation', 'uses' => 'InvitationController@create']);
+Route::get('/invitation', ['as' => 'get_invitation', 'uses' => 'InvitationController@readAll']);
+Route::delete('/invitation/{id}', ['as' => 'delete_invitation', 'uses' => 'InvitationController@delete']);
 
 /* CATEGORIES */
 Route::get('/category/{id}', ['as' => 'get_category', 'uses' => 'CategoryController@read']);
