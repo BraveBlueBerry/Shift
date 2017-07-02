@@ -19,6 +19,8 @@
           @include('application.instellingen')
           @include('application.wijzig_ww')
           @include('application.wijzig_uur')
+          @include('application.wijzig_team')
+          @include('application.add_member')
       </div>
     </div>
   </body>

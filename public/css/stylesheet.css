@@ -403,6 +403,12 @@ body {
     margin-top:50px;
 }
 
+#form-wijzigteam {
+    text-align:left;
+    margin-left:5px;
+    margin-top:50px;
+}
+
 #submit-button {
     text-transform:none;
 }
@@ -426,6 +432,18 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
-#tabel-teams {
+#tabel-teams, #tabel-members {
     margin-left:30px;
+}
+
+#tabel-members {
+    margin-top:30px;
+}
+
+.fa.uk-icon-button {
+    display:inline-flex;
+}
+
+hr{
+    margin-left:9px;
 }
