@@ -28,6 +28,7 @@ class CreateCategoriesTable extends Migration
                 ->references('id')
                 ->on('teams');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -37,6 +38,7 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('categories');
     }
 }

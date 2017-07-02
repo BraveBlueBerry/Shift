@@ -1,8 +1,8 @@
 <html>
   @include('application.parts.head', ['title' => 'Shift | Welkom'])
-  <body>
+  <body ng-app="Shift">
     <div id="pagebb">
-      <div id="adg3navbb">
+      <div id="adg3navbb" ng-controller="menuController" >
         @include('application.parts.navigation')
         @include('application.parts.navigationText')
         @include('application.parts.plus_menu')

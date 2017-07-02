@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTeamsTable extends Migration
+class CreateInvitationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,20 @@ class CreateTeamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('invitations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('owner')->unsigned();
-            $table->string('name');
-            $table->string('colour');
+            $table->integer('user')->unsigned();
+            $table->integer('team')->unsigned();
 
-            $table->foreign('owner')
+            $table->string('message');
+
+            $table->timestamps();
+
+            $table->foreign('team')
+                  ->references('id')
+                  ->on('teams');
+
+            $table->foreign('user')
                   ->references('id')
                   ->on('users');
         });
@@ -34,6 +41,6 @@ class CreateTeamsTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('invitations');
     }
 }

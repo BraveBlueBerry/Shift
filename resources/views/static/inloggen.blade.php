@@ -14,29 +14,6 @@
         @include('static.parts.navigation')
         </div>
     </nav>
-    <script>
-    var app = angular.module('loginForm', []);
-    app.controller('loginCtrl', function($scope, $http, $cookies) {
-        $scope.email = '';
-        $scope.password = '';
-        $scope.loginSubmit = function(event) {
-
-            $http({
-                method  :   "POST",
-                url     :   "{{env('API_HOST')}}/token",
-                data    :   {user: $scope.email,
-                             password: $scope.password}
-            }).then(function(response) {
-                //$scope.myData = response.data.records;
-                var token = response.data.token;
-                document.cookie = "token=" + token;
-                window.location = "/app";
-            });
-        }
-
-        console.log(document.cookie);
-    });
-    </script>
     <!-- Inloggen container inclusief logo -->
     <div class="uk-vertical-align uk-text-center uk-height-1-1">
         <div class="uk-vertical-align-middle container" ng-app="loginForm" ng-controller="loginCtrl" >
@@ -44,6 +21,11 @@
             <center>
               <h4>Log in bij Shift</h4>
             </center>
+            <div class='error error_login'>
+                <div class="uk-alert 404 uk-alert-danger">
+                    User doesn't exist or password is incorrect.
+                </div>
+            </div>
             <form  ng-submit='loginSubmit()' class="uk-panel uk-panel-box uk-form" style="background: #F0F0F0; border-radius: 10px;">
               <div class="uk-form-row">
                   <input  id="input_static" class="uk-width-1-1 uk-form-default" type="text" ng-model='email' placeholder="E-mail">

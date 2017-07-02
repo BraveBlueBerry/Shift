@@ -32,7 +32,7 @@ class UserController extends APIController
     public function read(Request $request, $id){
         $response = $this->compareTokenWithUserId($request, $id);
         if($response !== true){
-            return response()->json([], $response);
+            return response()->json(error($response[0]), $response[1]);
         }
         $user = $this->getUserByToken($request->header('token'));
         $attributes = ['first_name', 'last_name', 'email', 'id', 'created_at', 'updated_at'];
@@ -43,7 +43,7 @@ class UserController extends APIController
     public function update(Request $request, $id){
         $response = $this->compareTokenWithUserId($request, $id);
         if($response !== true){
-            return response()->json([], $response);
+            return response()->json(error($response[0]), $response[1]);
         }
         $things_to_change = ['first_name', 'last_name', 'email'];
         $things_we_got = [];
@@ -52,12 +52,11 @@ class UserController extends APIController
                 array_push($things_we_got, $user_attribute);
             }
         }
-        if(array_key_exists('email', $things_we_got)){
+        if(in_array('email', $things_we_got)){
             // Check if user with that email exists
-            $user = User::where('email', '=', $request->email)->first();
+            $user = User::where('email', '=', $request->email)->where('id', '<>', $id)->first();
             if($user){
-                $error = $this->createObjectFromArray(['error'=>'This email is in use.']);
-                return response()->json($error, 409);
+                return response()->json(error('This email is in use.'), 409);
             }
         }
         $user = $this->getUserByToken($request->header('token'));

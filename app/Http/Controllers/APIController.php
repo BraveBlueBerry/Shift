@@ -43,17 +43,17 @@ class APIController extends Controller
         $header = ['token'];
 
         if(!$this->fieldsSet($header, $request, 'header')){
-            return 404;
+            return ['Token not set in header.', 400];
         }
         $user = $this->getUserByToken($request->header('token'));
         if(!$user)
-            return 403;
+            return ["Token invalid.", 401];
         if($user->id != $id)
-            return 403;
+            return ["Can only change the token's user.", 403];
         return true;
     }
 
-    protected function createObjectFromArray($array){
+    public static function createObjectFromArray($array){
         $return = new \StdClass;
         foreach($array as $k => $v){
             $return->{$k} = $v;
@@ -73,6 +73,10 @@ class APIController extends Controller
         }
         $model->save();
     }
+}
+
+function error($errormessage){
+    return APIController::createObjectFromArray(["error"=>$errormessage]);
 }
 
 

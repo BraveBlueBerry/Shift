@@ -10,4 +10,8 @@ class User extends Model
     {
         return $this->belongsToMany('App\Models\Team', 'team_user', 'user', 'team');
     }
+    public function invitations()
+    {
+        return $this->hasMany('App\Models\Invitation', 'user', 'id');
+    }
 }

@@ -11,6 +11,7 @@ class TokenController extends APIController
 {
     public function create(Request $request){
         $isset = ['user', 'password'];
+        
         if(!$this->fieldsSet($isset, $request))
             return response()->json([], 404);
 
@@ -41,9 +42,11 @@ class TokenController extends APIController
     }
     public function delete(Request $request){
         $header = ['token'];
-        if(!$this->fieldsSet($isset, $request, 'header'))
-            return response()->json([], 404);
+        if(!$this->fieldsSet($header, $request, 'header'))
+            return response()->json([], 400);
         $token = Token::where('token','=',$request->header('token'))->first();
+        if(!$token)
+            return response()->json(error("Token doesn't exist"), 404);
         $token->delete();
         return response()->json([], 200);
     }

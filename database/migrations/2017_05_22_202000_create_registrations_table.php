@@ -39,6 +39,7 @@ class CreateRegistrationsTable extends Migration
               ->references('id')
               ->on('statuses');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -48,6 +49,7 @@ class CreateRegistrationsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('registrations');
     }
 }

@@ -15,8 +15,12 @@
     <!-- UIkit JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit-icons.min.js"></script>
-
     <!-- My CSS -->
     <link rel="stylesheet" href="{{ URL::asset('css/stylesheet.css') }}"/>
-
+    <!-- My Javascript -->
+    <script>
+        var API_HOST = '{{env("API_HOST")}}';
+    </script>
+    <script src="{{ URL::asset('js/common.js') }}"></script>
+    <script src="{{ URL::asset('js/static.js') }}"></script>
 </head>

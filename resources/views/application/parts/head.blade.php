@@ -18,6 +18,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.24/js/uikit-icons.min.js"></script>
 
   <!-- My JS -->
+  <script>
+      var API_HOST = '{{env("API_HOST")}}';
+      var USER_ID = {{$user->id}};
+  </script>
+  <script src="{{ URL::asset('js/common.js') }}"></script>
+  <script src="{{ URL::asset('js/app.js') }}"></script>
   <script src="{{ URL::asset('js/toggle_menus.js') }}"></script>
   <script src="{{ URL::asset('js/toggle_application.js') }}"></script>
 

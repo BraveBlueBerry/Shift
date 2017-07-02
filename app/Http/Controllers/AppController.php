@@ -29,6 +29,7 @@ class AppController extends Controller
             $user = json_decode($res);
         }
         else{
+            setcookie("token", "", time() - 1000);
             return redirect('inloggen');
         }
         return view('application.landing', compact('user'));

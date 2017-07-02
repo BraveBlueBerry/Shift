@@ -24,6 +24,7 @@ class CreateTeamUsersTable extends Migration
                   ->references('id')
                   ->on('teams');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -33,6 +34,7 @@ class CreateTeamUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('team_users');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('team_user');
     }
 }
