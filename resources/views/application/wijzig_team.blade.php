@@ -24,14 +24,14 @@
                                     <div class="uk-margin">
                                         <label id="filter-label" class="uk-form-label" for="naam_team">Naam team*</label>
                                         <div id="filter-controls" class="uk-form-controls">
-                                            <input id="naam_team" ng-model='make_team_name' ng-init="make_team_name=@{{active_team.name}}" class="uk-input uk-form-width-medium" type="text" placeholder="bv: DevTeam"/>
+                                            <input id="naam_team" ng-model='edit_team_name' class="uk-input uk-form-width-medium" type="text" placeholder="bv: DevTeam"/>
                                         </div>
                                     </div>
                                     <!-- color -->
                                     <div class="uk-margin">
                                         <label id="filter-label" class="uk-form-label" for="color_team">Kleur*</label>
                                         <div id="filter-controls" class="uk-form-controls">
-                                            <input id="color_team" ng-model='make_team_colour' class="uk-input uk-form-width-medium" value="@{{active_team.colour}}" type="color"/>
+                                            <input id="color_team" ng-model='edit_team_colour' class="uk-input uk-form-width-medium" type="color"/>
                                         </div>
                                     </div>
                                     <!-- Submit knop -->
@@ -56,9 +56,9 @@
                                 </thead>
                                 <tbody>
                                     <!-- Empty row -->
-                                    <tr ng-repeat="">
-                                        <th class="truncate"></th>
-                                        <td></td>
+                                    <tr ng-repeat="member in members_active_team">
+                                        <th>@{{member.first_name}} @{{member.last_name}}</th>
+                                        <td>@{{member.email}}</td>
                                         <td></td>
                                         <td><a class="uk-icon-button" uk-icon="icon:trash"></a></td>
                                     </tr>

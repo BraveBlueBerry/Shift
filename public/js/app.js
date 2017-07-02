@@ -116,6 +116,7 @@ app.controller('teamController', function($scope, $http) {
     $scope.loaded = false;
     $scope.active_team = {};
     $scope.team_to_be_deleted = false;
+    $scope.members_active_team = [];
     $scope.makeTeam = function(event) {
         $http({
             method  :   "POST",
@@ -152,6 +153,21 @@ app.controller('teamController', function($scope, $http) {
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.active_team = response.data;
+            $scope.edit_team_name = response.data.name;
+            $scope.edit_team_colour = response.data.colour;
+            $scope.loadMembers(team_id);
+        }, function(response){
+
+        });
+    }
+    $scope.loadMembers = function(team_id){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/team/" + team_id + "/member",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            console.log(response.data);
+            $scope.members_active_team = response.data;
         }, function(response){
 
         });

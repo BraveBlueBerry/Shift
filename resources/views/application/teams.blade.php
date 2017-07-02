@@ -15,6 +15,9 @@
                             Welkom op de team pagina!
                         </section>
                         <section class="dashboard-right-content">
+                            <div ng-if="loaded == false">
+                                <img src={{url('storage/spinner.gif')}} width="100" height="100" style="margin-top:100px;"/>
+                            </div>
                             <div ng-if="teams.length == 0 && loaded">
                                 <img class="uk-align-center" width="180" height="165" src="{{url('storage/logozwartwit.png')}}" alt="">
                                 Op het moment zijn er nog geen teams waarin je zit. <br /> Wil je een team toevoegen?
