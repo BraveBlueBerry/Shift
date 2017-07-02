@@ -113,6 +113,7 @@ app.controller('menuController', function($scope, $http) {
 });
 app.controller('teamController', function($scope, $http) {
     $scope.teams = [];
+    $scope.loaded = false;
     $scope.makeTeam = function(event) {
         $http({
             method  :   "POST",
@@ -130,11 +131,13 @@ app.controller('teamController', function($scope, $http) {
     }
 
     $scope.reload = function(){
+        $scope.loaded = false;
         $http({
             method  :   "GET",
             url     :   API_HOST + "/team",
             headers :   {'token': getCookie('token')}
         }).then(function(response){
+            $scope.loaded = true;
             $scope.teams = response.data;
         },function(response){
             alert("Alle velden invullen aub");
