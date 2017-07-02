@@ -1,4 +1,9 @@
-<div id="content_teams" class="content_right">
+<script>
+    function onLoad_teams(){
+        angular.element(jQuery('#content_teams')[0]).scope().reload();
+    }
+</script>
+<div id="content_teams" ng-controller="teamController" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Overzicht teams</div>
     <div class="page-panelbb">
         <div class="page-panel-innerbb">
@@ -15,7 +20,30 @@
                             Op het moment zijn er nog geen teams waarin je zit. <br /> Wil je een team toevoegen?
                             <a class="navbarLink" href="#maakteam">Dat kan hier</a>
                             -->
-                            @include('application.table.table_teams')
+                            <table id="tabel-teams">
+                                <thead>
+                                    <tr>
+                                        <th>Naam</th>
+                                        <th>Aantal leden</th>
+                                        <th>Uren samen gewerkt</th>
+                                        <th>Opties</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat='team in teams'>
+                                        <th class="truncate" style="background-color:@{{team.colour}}">@{{team.name}}</th>
+                                        <td>@{{team.members}}</td>
+                                        <td>0</td>
+                                        <td>
+                                            <a class="uk-icon-button" ng-click="setActiveTeam($index)" uk-icon="icon:trash"></a>
+                                            <a ng-if="team.owner == {{$user->id}}" href="#wijzigteam-@{{team.id}}" class="uk-icon-button navbarLink" uk-icon="icon:pencil"></a>
+                                            <a ng-if="team.owner == {{$user->id}}" class="navbarLink" href="#addmember-@{{team.id}}"><i class="fa fa-user-plus uk-icon-button"  aria-hidden="true"></i></a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                         </section>
                     </div>
                 </div>

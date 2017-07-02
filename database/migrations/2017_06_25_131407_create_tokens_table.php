@@ -23,6 +23,7 @@ class CreateTokensTable extends Migration
                 ->on('users');
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -32,6 +33,7 @@ class CreateTokensTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('tokens');
     }
 }

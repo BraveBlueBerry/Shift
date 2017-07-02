@@ -1,4 +1,9 @@
-<div id="content_wijzigteam" class="content_right">
+<script>
+    function onLoad_wijzigteam(data){
+        angular.element(jQuery('#content_wijzigteam')[0]).scope().loadEdit(data[1]);
+    }
+</script>
+<div id="content_wijzigteam" ng-controller="teamController" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Team aanpassen</div>
     <div class="page-panelbb">
         <div class="page-panel-innerbb">
