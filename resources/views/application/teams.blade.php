@@ -15,6 +15,7 @@
                             Op het moment zijn er nog geen teams waarin je zit. <br /> Wil je een team toevoegen?
                             <a class="navbarLink" href="#maakteam">Dat kan hier</a>
                             -->
+                            Een overzicht van alle teams waar je in zit
                             @include('application.table.table_teams')
                         </section>
                     </div>

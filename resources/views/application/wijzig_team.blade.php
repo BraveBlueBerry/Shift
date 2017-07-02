@@ -41,7 +41,6 @@
                             <br />
                             Overzicht van alle leden en de optie om leden te verwijderen
                             @include('application.table.table_members')
-
                         </section>
                     </div>
                 </div>

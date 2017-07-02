@@ -434,11 +434,9 @@ text-overflow: ellipsis;
 
 #tabel-teams, #tabel-members {
     margin-left:30px;
-}
-
-#tabel-members {
     margin-top:30px;
 }
+
 
 .fa.uk-icon-button {
     display:inline-flex;
