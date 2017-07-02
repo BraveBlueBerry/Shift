@@ -19,18 +19,12 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="color_team">Kleur*</label>
                                     <div class="uk-form-controls">
-                                        <input id="color_team" ng-model='make_team_colour' value="#ff3344" class="uk-input uk-form-width-large" type="color"/>
-                                        <script>
-                                            var red_value = (Math.round(Math.random() * 255)).toString(16);
-                                            var green_value = (Math.round(Math.random() * 255)).toString(16);
-                                            var blue_value = (Math.round(Math.random() * 255)).toString(16);
-                                            jQuery('#color_team').val('#'+red_value+green_value+blue_value);
-                                        </script>
+                                        <input id="color_team" ng-model='make_team_colour' value="#000000" class="uk-input uk-form-width-large" type="color"/>
                                     </div>
                                 </div>
                                 <!-- Submit knop -->
                                 <div class="uk-margin" >
-                                    <input type='submit' value='Submit' class="uk-button uk-button-default" />
+                                    <input type='submit' value='Opslaan' class="uk-button uk-button-default" />
                                 </div>
                             </fieldset>
                         </form>

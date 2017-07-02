@@ -36,9 +36,19 @@
                                             <td>@{{team.members}}</td>
                                             <td>0</td>
                                             <td>
-                                                <a class="uk-icon-button" ng-click="setActiveTeam($index)" uk-icon="icon:trash"></a>
+                                                <a href="#modal-verwijderteam" ng-click="setTeamToBeDeleted(team.id)" uk-toggle class="uk-icon-button trash-team-button" uk-icon="icon:trash"></a>
                                                 <a ng-if="team.owner == {{$user->id}}" href="#wijzigteam-@{{team.id}}" class="uk-icon-button navbarLink" uk-icon="icon:pencil"></a>
-                                                <a ng-if="team.owner == {{$user->id}}" class="navbarLink" href="#addmember-@{{team.id}}"><i class="fa fa-user-plus uk-icon-button"  aria-hidden="true"></i></a>
+                                                <a ng-if="team.owner == {{$user->id}}" href="#addmember-@{{team.id}}" class="navbarLink" ><i class="fa fa-user-plus uk-icon-button"  aria-hidden="true"></i></a>
+                                                <div id="modal-verwijderteam" uk-modal>
+                                                    <div class="uk-modal-dialog uk-modal-body">
+                                                        <h2 class="uk-modal-title">Verwijder @{{team.name}}</h2>
+                                                        <p>Weet je zeker dat je @{{team.name}} wilt verwijderen?</p>
+                                                        <p class="uk-text-right">
+                                                            <button class="uk-button uk-button-default uk-modal-close" type="button">Annuleren</button>
+                                                            <button class="modal-button-cheat uk-button uk-button-danger" type="button">Verwijder</button>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

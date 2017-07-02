@@ -23,7 +23,7 @@ class TeamController extends APIController
     }
 
     public function read($id){
-        $team = Team::where('id', '=', $id);
+        $team = Team::where('id', '=', $id)->first();
         if(!$team)
             return response()->json(error("Team not found"), 404);
         $attributes = ['id','name','owner','colour'];

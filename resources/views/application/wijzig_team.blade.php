@@ -18,25 +18,25 @@
                             -->
                             <br />
                             Gegevens van een team wijzigen
-                            <form id="form-wijzigteam" class="uk-form-horizontal">
+                            <form id="form-wijzigteam" ng-controller="teamController" ng-submit='editTeam()'class="uk-form-horizontal">
                                 <fieldset class="uk-fieldset">
                                     <!-- Naam team -->
                                     <div class="uk-margin">
                                         <label id="filter-label" class="uk-form-label" for="naam_team">Naam team*</label>
                                         <div id="filter-controls" class="uk-form-controls">
-                                            <input id="naam_team" class="uk-input uk-form-width-medium" type="text" placeholder="bv: DevTeam"/>
+                                            <input id="naam_team" ng-model='make_team_name' ng-init="make_team_name=@{{active_team.name}}" class="uk-input uk-form-width-medium" type="text" placeholder="bv: DevTeam"/>
                                         </div>
                                     </div>
                                     <!-- color -->
                                     <div class="uk-margin">
                                         <label id="filter-label" class="uk-form-label" for="color_team">Kleur*</label>
                                         <div id="filter-controls" class="uk-form-controls">
-                                            <input id="color_team" class="uk-input uk-form-width-medium" type="color"/>
+                                            <input id="color_team" ng-model='make_team_colour' class="uk-input uk-form-width-medium" value="@{{active_team.colour}}" type="color"/>
                                         </div>
                                     </div>
                                     <!-- Submit knop -->
                                     <div class="uk-margin" >
-                                        <button id="submit-button" class="uk-button uk-button-default">Wijzigingen opslaan</button>
+                                        <input type="submit" id="submit-button" value="Wijzigingen opslaan" class="uk-button uk-button-default"></button>
                                     </div>
                                 </fieldset>
                             </form>
@@ -45,7 +45,25 @@
                         <section class="dashboard-right-content">
                             <br />
                             Overzicht van alle leden en de optie om leden te verwijderen
-                            @include('application.table.table_members')
+                            <table id="tabel-members">
+                                <thead>
+                                    <tr>
+                                        <th>Naam</th>
+                                        <th>Email</th>
+                                        <th>Uren gewerkt</th>
+                                        <th>Opties</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Empty row -->
+                                    <tr ng-repeat="">
+                                        <th class="truncate"></th>
+                                        <td></td>
+                                        <td></td>
+                                        <td><a class="uk-icon-button" uk-icon="icon:trash"></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </section>
                     </div>
                 </div>
