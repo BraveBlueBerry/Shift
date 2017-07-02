@@ -1,5 +1,5 @@
 <div id="content_wijzigww" class="content_right">
-    <div class="uk-text-lead headText app-headerbb">Mijn Account</div>
+    <div class="uk-text-lead headText app-headerbb">Wijzig wachtwoord</div>
     <div class="page-panelbb">
         <div class="page-panel-innerbb">
             <div class="page-panel-content maskablebb" id="dashboard-containerbb">
@@ -15,23 +15,23 @@
                                 <fieldset class="uk-fieldset">
                                     <!-- Oud wachtwoord gebruiker -->
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="voornaam_gebruiker">Oud wachtwoord: </label>
+                                        <label class="uk-form-label" for="oudww">Oud wachtwoord: </label>
                                         <div class="uk-form-controls">
-                                            <input id="voornaam_gebruiker" class="uk-input uk-form-width-large" type="password"/>
+                                            <input id="oudww" class="uk-input uk-form-width-large" type="password"/>
                                         </div>
                                     </div>
                                     <!-- Nieuw wachtwoord 1 gebruiker -->
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="achternaam_gebruiker">Nieuw wachtwoord: </label>
+                                        <label class="uk-form-label" for="nieuwww">Nieuw wachtwoord: </label>
                                         <div class="uk-form-controls">
-                                            <input id="achternaam_gebruiker" class="uk-input uk-form-width-large" type="password"/>
+                                            <input id="nieuwww" class="uk-input uk-form-width-large" type="password"/>
                                         </div>
                                     </div>
                                     <!-- Nieuw wachtwoord 2 gebruiker -->
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="email_gebruiker">Herhaal wachtwoord: </label>
+                                        <label class="uk-form-label" for="nieuwwwher">Herhaal wachtwoord: </label>
                                         <div class="uk-form-controls">
-                                            <input id="email_gebruiker" class="uk-input uk-form-width-large" type="password"/>
+                                            <input id="nieuwwwher" class="uk-input uk-form-width-large" type="password"/>
                                         </div>
                                     </div>
                                     <!-- Submit knop -->

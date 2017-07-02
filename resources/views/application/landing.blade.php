@@ -18,6 +18,7 @@
           @include('application.account')
           @include('application.instellingen')
           @include('application.wijzig_ww')
+          @include('application.wijzig_uur')
       </div>
     </div>
   </body>
