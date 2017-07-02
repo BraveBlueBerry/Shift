@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', ['as' => 'Home', 'uses' => 'HomeController@index']);
+
 
 # Routes for testing the style
-Route::get('/styletest', ['as' => 'Test', 'uses' => 'StyleController@index']);
-Route::get('/aanmelden', ['as' => 'aanmelden', 'uses' => 'StyleController@aanmelden']);
-Route::get('/contact', ['as' => 'contact', 'uses' => 'StyleController@contact']);
-Route::get('/home', ['as' => 'home', 'uses' => 'StyleController@home']);
-Route::get('/inloggen', ['as' => 'inloggen', 'uses' => 'StyleController@inloggen']);
-Route::get('/landing', ['as' => 'landing', 'uses' => 'StyleController@landing']);
+Route::get('/aanmelden', ['as' => 'aanmelden', 'uses' => 'StaticSiteController@aanmelden']);
+Route::get('/contact', ['as' => 'contact', 'uses' => 'StaticSiteController@contact']);
+Route::get('/home', ['as' => 'home', 'uses' => 'StaticSiteController@home']);
+Route::get('/inloggen', ['as' => 'inloggen', 'uses' => 'StaticSiteController@inloggen']);
+Route::get('/', ['as' => 'home', 'uses' => 'StaticSiteController@home']);
+
+
+Route::get('/app', ['as' => 'landing', 'uses' => 'AppController@landing']);
 ?>

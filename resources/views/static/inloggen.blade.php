@@ -16,7 +16,7 @@
     </nav>
     <script>
     var app = angular.module('loginForm', []);
-    app.controller('loginCtrl', function($scope, $http) {
+    app.controller('loginCtrl', function($scope, $http, $cookies) {
         $scope.email = '';
         $scope.password = '';
         $scope.loginSubmit = function(event) {
@@ -30,9 +30,11 @@
                 //$scope.myData = response.data.records;
                 var token = response.data.token;
                 document.cookie = "token=" + token;
-                window.location = "/landing";
+                window.location = "/app";
             });
         }
+
+        console.log(document.cookie);
     });
     </script>
     <!-- Inloggen container inclusief logo -->
