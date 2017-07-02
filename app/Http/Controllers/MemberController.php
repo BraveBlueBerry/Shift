@@ -11,7 +11,7 @@ class MemberController extends APIController
         $user = $this->getUserByToken($request->header('token'));
         if(!$user)
             return response()->json(error("No user for this token"), 401);
-        $team = Team::where('id', '=', $request->team)->first();
+        $team = Team::where('id', '=', $team_id)->first();
         if(!$team)
             return response()->json(error("The team for the specified id doesn't exist"), 404);
         $members = $team->members->toArray();
