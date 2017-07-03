@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Token;
 use App\Models\User;
+use App\Models\Team;
 
 class APIController extends Controller
 {
@@ -48,8 +49,19 @@ class APIController extends Controller
         $user = $this->getUserByToken($request->header('token'));
         if(!$user)
             return ["Token invalid.", 401];
-        if($user->id != $id)
-            return ["Can only change the token's user.", 403];
+        if($user->id != $id){
+            $all_is_fine = false;
+            $team_ids = $user->invitations()->pluck('team')->toArray();
+            foreach($team_ids as $team_id){
+                $team = Team::where('id','=',$team_id)->first();
+                $owner = $team->owner;
+                if($id == $owner){
+                    $all_is_fine = true;
+                }
+            }
+            if(!$all_is_fine)
+                return ["Can only change the token's user.", 403];
+        }
         return true;
     }
 

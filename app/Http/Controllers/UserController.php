@@ -36,15 +36,16 @@ class UserController extends APIController
         }
         $user = $this->getUserByToken($request->header('token'));
         $attributes = ['first_name', 'last_name', 'email', 'id', 'created_at', 'updated_at'];
-        $return_user = $this->extractFromModel($user, $attributes);
+        $return_user = $this->extractFromModel(User::where('id','=',$id)->first(), $attributes);
 
         return response()->json($return_user, 200);
     }
     public function update(Request $request, $id){
-        $response = $this->compareTokenWithUserId($request, $id);
-        if($response !== true){
-            return response()->json(error($response[0]), $response[1]);
-        }
+        $user = $this->getUserByToken($request->header('token'));
+        if(!$user)
+            return response()->json(error("No user for this token"), 401);
+        if($user->id != $id)
+            return response()->json(error("Token owner is not this user"), 403);
         $things_to_change = ['first_name', 'last_name', 'email'];
         $things_we_got = [];
         foreach($things_to_change as $user_attribute){
@@ -78,11 +79,11 @@ class UserController extends APIController
         if(strtolower($request->areyousure) != 'verwijder')
             return response()->json([], 406);
 
-        $user = $this->getUserByToken($request->token);
+        $user = $this->getUserByToken($request->header('token'));
         if(!$user)
-            return response()->json([], 404);
+            return response()->json(error("No user for this token"), 401);
         if($user->id != $id)
-            return response()->json([], 403);
+            return response()->json(error("Token owner is not this user"), 403);
 
         // Ok, delete user - leave registrations
         $user->delete();

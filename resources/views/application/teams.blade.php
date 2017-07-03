@@ -1,6 +1,7 @@
 <script>
     function onLoad_teams(){
         angular.element(jQuery('#content_teams')[0]).scope().reload();
+        angular.element(jQuery('#tabel-invites')[0]).scope().getInvite();
     }
 </script>
 <div id="content_teams" ng-controller="teamController" class="content_right">
@@ -18,6 +19,9 @@
                             <div ng-if="loaded == false">
                                 <img src={{url('storage/spinner.gif')}} width="100" height="100" style="margin-top:100px;"/>
                             </div>
+
+                                @include('application.parts.inv')
+
                             <div ng-if="teams.length == 0 && loaded == true">
                                 <img class="uk-align-center" width="180" height="165" src="{{url('storage/logozwartwit.png')}}" alt="">
                                 Op het moment zijn er nog geen teams waarin je zit. <br /> Wil je een team toevoegen?
