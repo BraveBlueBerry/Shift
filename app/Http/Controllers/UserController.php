@@ -42,6 +42,7 @@ class UserController extends APIController
     }
     public function update(Request $request, $id){
         $user = $this->getUserByToken($request->header('token'));
+        $request = $this->createObjectFromArray($request->all());
         if(!$user)
             return response()->json(error("No user for this token"), 401);
         if($user->id != $id)

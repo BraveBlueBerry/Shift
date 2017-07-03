@@ -63,6 +63,7 @@ Route::post('/team/{team_id}/category', ['as' => 'post_categories_for_team', 'us
 /* REGISTRATIONS */
 Route::get('/registration/{id}', ['as' => 'get_registration', 'uses' => 'RegistrationController@read']);
 Route::get('/registration', ['as' => 'get_registrations', 'uses' => 'RegistrationController@readAll']);
+Route::get('/team/{team_id}/registration', ['as' => 'get_team_registrations', 'uses' => 'RegistrationController@readAllTeam']);
 Route::put('/registration/{id}', ['as' => 'put_registration', 'uses' => 'RegistrationController@update']);
 Route::post('/registration', ['as' => 'post_registration', 'uses' => 'RegistrationController@create']);
 Route::delete('/registration/{id}', ['as' => 'delete_registration', 'uses' => 'RegistrationController@delete']);
