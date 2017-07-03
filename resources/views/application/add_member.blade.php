@@ -35,7 +35,7 @@
                                     <!-- Submit knop -->
                                     <div class="uk-margin" >
                                         <input type='submit' ng-click="sendInvAndBack()" value='Verstuur en terug' class="no-text-transform uk-button uk-button-default" />
-                                        <input type='submit' ng-click="sendInvAndAgain()" value='Verstuur en nog een uitnodiging' class="no-text-transform uk-button uk-button-default" />
+                                        <button type='button' ng-click="sendInvAndAgain()" id="send-inv-and-again-btn" data-message="Uitnodiging verstuurd" data-status="success" class="no-text-transform uk-button uk-button-default">Verstuur en nog een uitnodiging</button>
                                     </div>
                                 </fieldset>
                             </form>

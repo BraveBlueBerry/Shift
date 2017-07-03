@@ -19,12 +19,11 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Empty row -->
                 <tr ng-repeat="invitation in invitations">
                     <th>@{{invitation.team_data.owner.first_name}} @{{invitation.team_data.owner.last_name}}</th>
                     <td>@{{invitation.team_data.name}}</td>
                     <td>@{{invitation.message}}</td>
-                    <td><a id="inv-acc" class="uk-icon-button" ng-click="acceptInvite(invitation.id)" uk-icon="icon:check"></a><a id="inv-dec" class="uk-icon-button" ng-click="declineInvite" uk-icon="icon:close"></a></td>
+                    <td><a id="inv-acc" class="uk-icon-button" ng-click="acceptInvite(invitation.id)" uk-icon="icon:check"></a><a id="inv-dec" class="uk-icon-button" ng-click="declineInvite(invitation.id)" uk-icon="icon:close"></a></td>
                 </tr>
             </tbody>
         </table>

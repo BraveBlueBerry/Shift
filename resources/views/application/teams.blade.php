@@ -43,9 +43,10 @@
                                             <td>@{{team.members}}</td>
                                             <td>0</td>
                                             <td>
-                                                <a href="#modal-verwijderteam" ng-click="setTeamToBeDeleted(team.id)" uk-toggle class="uk-icon-button trash-team-button" uk-icon="icon:trash"></a>
+                                                <a ng-if="team.owner == {{$user->id}}" href="#modal-verwijderteam" ng-click="setTeamToBeDeleted(team.id)" uk-toggle class="uk-icon-button trash-team-button" uk-icon="icon:trash"></a>
+                                                <a ng-if="team.owner != {{$user->id}}" ng-click="leaveTeam(team.id)" class="uk-icon-button trash-team-button" uk-icon="icon:sign-out"></a>
                                                 <a ng-if="team.owner == {{$user->id}}" href="#wijzigteam-@{{team.id}}" class="uk-icon-button navbarLink" uk-icon="icon:pencil"></a>
-                                                <a ng-if="team.owner == {{$user->id}}" href="#addmember-@{{team.id}}" class="navbarLink" ><i class="fa fa-user-plus uk-icon-button"  aria-hidden="true"></i></a>
+                                                <a ng-if="team.owner == {{$user->id}}" href="#addmember-@{{team.id}}" id="add-member-knop" class="navbarLink" ><i class="fa fa-user-plus uk-icon-button"  aria-hidden="true"></i></a>
                                                 <div id="modal-verwijderteam" uk-modal>
                                                     <div class="uk-modal-dialog uk-modal-body">
                                                         <h2 class="uk-modal-title">Verwijder @{{team.name}}</h2>

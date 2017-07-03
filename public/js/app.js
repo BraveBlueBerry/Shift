@@ -228,6 +228,19 @@ app.controller('teamController', function($scope, $http) {
             console.log("Couldn't delete this member");
         });
     }
+    $scope.leaveTeam = function(team_id){
+
+        $http({
+            method  :   "DELETE",
+            url     :   API_HOST + "/team/" + team_id + "/member/" + USER_ID,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            console.log("Deleted a member");
+            $scope.reload();
+        }, function(response){
+            console.log(response);
+        });
+    }
     $scope.setTeamToBeDeleted = function(team_id){
         $scope.team_to_be_deleted = team_id;
     }
@@ -262,7 +275,7 @@ app.controller('invitationController', function($scope, $http) {
                         },
             headers :   {'token': getCookie('token')}
         }).then(function(response){
-            jQuery('#teamsKnop')[0].click();
+            console.log("Uitnodiging verstuurd");
         },function(response){
             console.log(active_team);
             alert("Alle velden invullen aub");
@@ -281,8 +294,6 @@ app.controller('invitationController', function($scope, $http) {
             for(var i = 0; i < invitations.length; i++){
                  $scope.getTeam(invitations[i].team);
             }
-
-            console.log($scope.invitations);
         },function(response){
         });
     }
@@ -294,11 +305,25 @@ app.controller('invitationController', function($scope, $http) {
             headers :   {'token': getCookie('token'), 'Content-Type': 'application/x-www-form-urlencoded'},
             data    :   "response=accept"
         }).then(function(response){
-            console.log("Hallo");
-            console.log(response);
+            $scope.getInvite();
+            jQuery('#teamsKnop')[0].click();
+            console.log("Invite is geaccepteerd en verwijderd");
         },function(response){
-            console.log("Doei");
-            console.log(response);
+            console.log("Error: Invite is niet verwijerd");
+        });
+    }
+    $scope.declineInvite = function(inv_id) {
+        $http({
+            method  :   "DELETE",
+            url     :   API_HOST + "/invitation/" + inv_id,
+            headers :   {'token': getCookie('token'), 'Content-Type': 'application/x-www-form-urlencoded'},
+            data    :   "response=decline"
+        }).then(function(response){
+            $scope.getInvite();
+            jQuery('#teamsKnop')[0].click();
+            console.log("Invite is afgewezen en verwijderd");
+        },function(response){
+            console.log("Error: Invite is niet verwijderd");
         });
     }
     $scope.getTeam = function(team_id) {
@@ -359,9 +384,12 @@ app.controller('invitationController', function($scope, $http) {
 
     $scope.sendInvAndAgain = function() {
         $scope.makeInvite();
-        $scope.reload();
+        UIkit.notification(jQuery("#send-inv-and-again-btn").data());
     }
 });
+setInterval(function(){
+    angular.element(jQuery('#content_landing')[0]).scope().getInvite();
+}, 5000);
 // jQuery(document).on('click', '#modal-verwijderteam .modal-button-cheat', function(){
 //     angular.element(jQuery('#content_teams')[0]).scope().deleteTeam();
 // });

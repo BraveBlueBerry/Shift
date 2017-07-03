@@ -2,9 +2,7 @@
     function onLoad_landing(){
         angular.element(jQuery('#content_landing')[0]).scope().getInvite();
     }
-    setInterval(function(){
-        onLoad_landing();
-    }, 5000);
+
 </script>
 <div id="content_landing" ng-controller="invitationController" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Welkom {{$user->first_name}}</div>
