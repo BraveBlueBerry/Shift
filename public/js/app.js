@@ -275,6 +275,7 @@ app.controller('invitationController', function($scope, $http) {
                         },
             headers :   {'token': getCookie('token')}
         }).then(function(response){
+            UIkit.notification(jQuery("#send-inv-and-again-btn").data());
             console.log("Uitnodiging verstuurd");
         },function(response){
             console.log(active_team);
@@ -384,7 +385,7 @@ app.controller('invitationController', function($scope, $http) {
 
     $scope.sendInvAndAgain = function() {
         $scope.makeInvite();
-        UIkit.notification(jQuery("#send-inv-and-again-btn").data());
+
     }
 });
 setInterval(function(){

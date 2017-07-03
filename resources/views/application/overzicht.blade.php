@@ -1,3 +1,8 @@
+<script>
+    function onLoad_overzicht(){
+        angular.element(jQuery('#sort_team')[0]).scope().reload();
+    }
+</script>
 <div id="content_overzicht" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Overzicht uren</div>
     <div class="page-panelbb">
@@ -36,10 +41,10 @@
                                 <div class="uk-margin">
                                     <label id="filter-label" class="uk-form-label" for="sort_team">Team</label>
                                     <div id="filter-controls" class="uk-form-controls">
-                                        <select id="sort_team" class="uk-select uk-form-width-large">
+                                        <select id="sort_team" ng-controller="teamController" class="uk-select uk-form-width-large">
                                             <!-- Deze opties staan niet vast, moet samengaan met de teams waar de gebruiker in zit -->
-                                            <option>Categorie 01</option>
-                                            <option>Categorie 02</option>
+                                            <option>Geen team</option>
+                                            <option ng-repeat="team in teams">@{{team.name}}</option>
                                         </select>
                                     </div>
                                 </div>

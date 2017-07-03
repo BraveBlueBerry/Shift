@@ -1,3 +1,8 @@
+<script>
+    function onLoad_maakuur(){
+        angular.element(jQuery('#options_team')[0]).scope().reload();
+    }
+</script>
 <div id="content_maakuur" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Nieuwe uren registratie</div>
     <div class="page-panelbb">
@@ -39,13 +44,13 @@
                                         <input id="tijd_gewerkt" class="uk-input uk-form-width-large" type="text" placeholder="bv: 1,5"/>
                                     </div>
                                 </div>
-                                <!-- Team (optioneel) -->
+                                <!-- Team -->
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="options_team">Team</label>
                                     <div class="uk-form-controls">
-                                        <select id="options_team" class="uk-select uk-form-width-large">
-                                            <option>Team 01</option>
-                                            <option>Team 02</option>
+                                        <select id="options_team" ng-controller="teamController" class="uk-select uk-form-width-large">
+                                            <option>Geen team</option>
+                                            <option ng-repeat="team in teams">@{{team.name}}</option>
                                         </select>
                                     </div>
                                 </div>
