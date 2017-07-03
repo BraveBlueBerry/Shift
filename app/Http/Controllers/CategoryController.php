@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Team;
 
 class CategoryController extends APIController
 {
@@ -57,7 +58,17 @@ class CategoryController extends APIController
         }
     }
     public function readAllTeam(Request $request, $team_id){
-
+        $team = Team::where('id','=',$team_id)->first();
+        if(!$team)
+            return response()->json(error("Team doesn't exist "), 404);
+        $user = $this->getUserByToken($request->header('token'));
+        $members = $team->members()->pluck('id')->toArray();
+        $members[] = $team->owner;
+        if(!in_array($user->id, $members)){
+            return response()->json(error("Not part of team"), 403);
+        }
+        $categories = $team->categories->toArray();
+        dd($categories);
     }
     public function readAll(Request $request){
 

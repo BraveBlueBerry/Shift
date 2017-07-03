@@ -55,6 +55,7 @@ class TeamController extends APIController
     }
     public function update(Request $request, $id){
         $user = $this->getUserByToken($request->header('token'));
+        $request = $this->createObjectFromArray($request->all());
         if(!$user)
             return response()->json(error("No user for this token"), 401);
         $team = Team::where('id', '=', $id)->first();
@@ -66,6 +67,8 @@ class TeamController extends APIController
 
         $accepted = ['name', 'colour'];
         $this->updateModelFromRequest($accepted, $team, $request);
+        print("Hello");
+        dd($request);
         return response()->json([], 200);
     }
     public function delete(Request $request, $id){
