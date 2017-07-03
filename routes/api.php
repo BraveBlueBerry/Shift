@@ -66,3 +66,8 @@ Route::get('/registration', ['as' => 'get_registrations', 'uses' => 'Registratio
 Route::put('/registration/{id}', ['as' => 'put_registration', 'uses' => 'RegistrationController@update']);
 Route::post('/registration', ['as' => 'post_registration', 'uses' => 'RegistrationController@create']);
 Route::delete('/registration/{id}', ['as' => 'delete_registration', 'uses' => 'RegistrationController@delete']);
+
+/* STATUSES */
+
+Route::get('/status/{id}', ['as' => 'get_status', 'uses' => 'StatusController@read']);
+Route::get('/status', ['as' => 'get_statuses', 'uses' => 'StatusController@readAll']);

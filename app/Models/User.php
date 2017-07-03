@@ -18,4 +18,8 @@ class User extends Model
     {
         return $this->hasMany('App\Models\Category', 'user', 'id');
     }
+    public function registrations()
+    {
+        return $this->hasMany('App\Models\Registration', 'user', 'id');
+    }
 }

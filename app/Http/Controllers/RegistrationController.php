@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\Team;
 use App\Models\Category;
+use App\Models\Status;
 
 class RegistrationController extends APIController
 {
@@ -16,8 +17,9 @@ class RegistrationController extends APIController
             return response()->json(error("No user for this token"), 401);
         if(!$this->fieldsSet($isset, $request))
             return response()->json(error("Fields missing: 'uren','omschrijving', 'datetime' and 'category' must be set."), 400);
+
         $registration = new Registration();
-        if($this->fieldsSet(['team'])){
+        if($this->fieldsSet(['team'], $request)){
             $team = Team::where("id","=",$request->team)->first();
             if(!$team)
                 return response()->json(error("Team doesn't exist"), 404);
@@ -49,6 +51,14 @@ class RegistrationController extends APIController
         $registration->year = $split[0];
         $registration->month = $split[1];
         $registration->day = $split[2];
+        $registration->status = 1;
+        if(isset($request->status)){
+            $status = Status::where('id','=',$request->status)->first();
+            if(!$status)
+                return response()->json(error("Status does not exist"), 404);
+            $registration->status = $request->status;
+        }
+
         $registration->save();
         return response()->json([],200);
     }
@@ -66,11 +76,14 @@ class RegistrationController extends APIController
         }
         $attributes = ['year','day','month','id','hours','category','description','status','team','user'];
         $obj = $this->extractFromModel($registration, $attributes);
-        return response()->json($obj, 200);
+        return response()->json($obj, 200); 
 
     }
     public function readAll(Request $request){
-        return response()->json(error("Not implemented"), 500);
+        $user = $this->getUserByToken($request->header('token'));
+        if(!$user)
+            return response()->json(error("No user for this token"), 401);
+        return response()->json($user->registrations, 200);
     }
     public function readAllTeam(Request $request){
 

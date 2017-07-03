@@ -30,8 +30,10 @@ class MemberController extends APIController
         $team = Team::where('id', '=', $team_id)->first();
         if(!$team)
             return response()->json(error("The team for the specified id doesn't exist."), 404);
-        if($team->owner != $user->id)
-            return response()->json(error("Token owner isn't owner of the team."), 403);
+        if($team->owner != $user->id){
+            if($user->id != $user_id)
+                return response()->json(error("Token owner isn't owner of the team and not the user to be removed."), 403);
+        }
         $members = $team->members->toArray();
         $user_id_list = [];
         foreach($members as $m){
