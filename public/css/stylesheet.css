@@ -455,3 +455,18 @@ hr{
     display: none;
 }
 .error .uk-alert-warning{ border-color: #faa05a; }
+
+.no-text-transform {
+    text-transform:none;
+}
+
+#inv-acc {
+    background-color:#1be54e;
+    color:white;
+    margin-right:5px;
+}
+
+#inv-dec {
+    background-color:#ea1236;
+    color:white;
+}

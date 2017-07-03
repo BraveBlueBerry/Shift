@@ -120,6 +120,7 @@ app.controller('menuController', function($scope, $http) {
 app.controller('teamController', function($scope, $http) {
     $scope.loaded = false;
     $scope.teams = [];
+    $scope.invitations = [];
     $scope.members_active_team = [];
     $scope.active_team = {};
     $scope.team_to_be_deleted = false;
@@ -242,6 +243,124 @@ jQuery(document).on('click', '#modal-verwijderteam .modal-button-cheat', functio
 });
 jQuery(document).on('click', '#modal-verwijdermember .modal-button-cheat', function(){
     angular.element(jQuery('#content_teams')[0]).scope().deleteMember();
+});
+
+app.controller('invitationController', function($scope, $http) {
+    $scope.team = false;
+    $scope.invitations = [];
+    $scope.team_owner_id = false;
+    $scope.owner = {};
+
+    $scope.makeInvite = function() {
+        $http({
+            method  :   "POST",
+            url     :   API_HOST + "/invitation",
+            data    :   {
+                            team    :   $scope.team.id,
+                            email   :   $scope.make_invite_email,
+                            message :   $scope.make_invite_message
+                        },
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            jQuery('#teamsKnop')[0].click();
+        },function(response){
+            console.log(active_team);
+            alert("Alle velden invullen aub");
+        });
+    }
+
+    $scope.getInvite = function() {
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/invitation",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            var invitations = response.data;
+
+            $scope.invitations = invitations;
+            for(var i = 0; i < invitations.length; i++){
+                 $scope.getTeam(invitations[i].team);
+            }
+
+            console.log($scope.invitations);
+        },function(response){
+        });
+    }
+
+    $scope.acceptInvite = function(inv_id) {
+        $http({
+            method  :   "DELETE",
+            url     :   API_HOST + "/invitation/" + inv_id,
+            headers :   {'token': getCookie('token'), 'Content-Type': 'application/x-www-form-urlencoded'},
+            data    :   "response=accept"
+        }).then(function(response){
+            console.log("Hallo");
+            console.log(response);
+        },function(response){
+            console.log("Doei");
+            console.log(response);
+        });
+    }
+    $scope.getTeam = function(team_id) {
+
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/team/" + team_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            var team = {};
+            team.name = response.data.name;
+            team.owner = response.data.owner;
+
+            for(var i = 0; i < $scope.invitations.length; i++){
+                 if($scope.invitations[i].team == team_id)
+                    $scope.invitations[i].team_data = team;
+            }
+            $scope.getOwner(team.owner);
+        });
+    }
+    $scope.setActiveTeam = function(team_id) {
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/team/" + team_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.team = response.data;
+            $scope.team_owner_id = $scope.team.owner;
+            $scope.getOwner($scope.team_owner_id);
+        },function(response){
+            console.log("setActiveTeam error: ");
+            console.log(response);
+        });
+    }
+
+    $scope.getOwner = function (owner_id){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/user/" + owner_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            for(var i = 0; i < $scope.invitations.length; i++){
+                if($scope.invitations[i].team_data.owner == owner_id){
+                    $scope.invitations[i].team_data.owner = response.data
+                }
+            }
+            console.log($scope.invitations);
+        },function(response){
+            console.log("Get owner error: ");
+            console.log(response);
+        });
+    }
+
+    $scope.sendInvAndBack = function() {
+        $scope.makeInvite();
+        jQuery('#teamsKnop')[0].click();
+    }
+
+    $scope.sendInvAndAgain = function() {
+        $scope.makeInvite();
+        $scope.reload();
+    }
 });
 // jQuery(document).on('click', '#modal-verwijderteam .modal-button-cheat', function(){
 //     angular.element(jQuery('#content_teams')[0]).scope().deleteTeam();

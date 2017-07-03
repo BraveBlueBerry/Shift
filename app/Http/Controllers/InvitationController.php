@@ -50,12 +50,13 @@ class InvitationController extends APIController
         $invitation = Invitation::where('id','=',$id)->where('user','=',$user->id)->first();
         if(!$invitation)
             return response()->json(error("Invitation doesn't exist."), 404);
-        if(!$this->fieldsSet($isset, $request))
+        $request = $request->all();
+        if(!array_key_exists("response", $request))
             return response()->json(error("Fields missing: 'response' must be set."), 400);
-        if(!in_array($request->response, ['accept', 'decline']))
+        if(!in_array($request['response'], ['accept', 'decline']))
             return response()->json(error("Response must be 'accept' or 'decline'."), 400);
 
-        if($request->response == 'accept'){
+        if($request['response'] == 'accept'){
             $invitation->team_object->members()->attach($user);
         }
 
