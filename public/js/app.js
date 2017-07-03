@@ -104,7 +104,7 @@ function hideUserMenu() {
 -------------------------------------------------------------------------------------------------------------------------------------------------------
  */
 var app = angular.module('Shift', []);
-var active_team;
+var active_team_id;
 var member_to_be_deleted = 0;
 app.controller('menuController', function($scope, $http) {
     $scope.logoutClick = function(event) {
@@ -162,7 +162,7 @@ app.controller('teamController', function($scope, $http) {
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.active_team = response.data;
-            active_team = response.data.id;
+            active_team_id = response.data.id;
             $scope.edit_team_name = response.data.name;
             $scope.edit_team_colour = response.data.colour;
             $scope.loadMembers(team_id);
@@ -187,7 +187,7 @@ app.controller('teamController', function($scope, $http) {
         $scope.teamEdited = false;
         $http({
             method  :   "PUT",
-            url     :   API_HOST + "/team/" + active_team,
+            url     :   API_HOST + "/team/" + active_team_id,
             data    :   "name="+$scope.edit_team_name+"&colour="+encodeURI($scope.edit_team_colour),
             //params: {team_name: $scope.make_team_name, colour: $scope.make_team_colour},
             headers :   {'token': getCookie('token'), 'Content-Type': 'application/x-www-form-urlencoded'},
@@ -220,7 +220,7 @@ app.controller('teamController', function($scope, $http) {
 
         $http({
             method  :   "DELETE",
-            url     :   API_HOST + "/team/" + active_team + "/member/" + member_to_be_deleted,
+            url     :   API_HOST + "/team/" + active_team_id + "/member/" + member_to_be_deleted,
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             console.log("Deleted a member");
@@ -391,6 +391,10 @@ app.controller('invitationController', function($scope, $http) {
 setInterval(function(){
     angular.element(jQuery('#content_landing')[0]).scope().getInvite();
 }, 5000);
+
+app.controller('categoryController', function($scope, $http) {
+
+});
 // jQuery(document).on('click', '#modal-verwijderteam .modal-button-cheat', function(){
 //     angular.element(jQuery('#content_teams')[0]).scope().deleteTeam();
 // });

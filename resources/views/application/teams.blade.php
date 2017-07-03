@@ -16,17 +16,19 @@
                             Welkom op de team pagina!
                         </section>
                         <section class="dashboard-right-content">
+                            <!-- Spinner voor tijdens het laden -->
                             <div ng-if="loaded == false">
                                 <img src={{url('storage/spinner.gif')}} width="100" height="100" style="margin-top:100px;"/>
                             </div>
-
-                                @include('application.parts.inv')
-
+                            <!-- Uitnodigingen tabel voor wanneer er uitnodigingen zijn -->
+                            @include('application.parts.inv')
+                            <!-- Opmaak wanneer er geen teams zijn voor de user -->
                             <div ng-if="teams.length == 0 && loaded == true">
                                 <img class="uk-align-center" width="180" height="165" src="{{url('storage/logozwartwit.png')}}" alt="">
                                 Op het moment zijn er nog geen teams waarin je zit. <br /> Wil je een team toevoegen?
                                 <a class="navbarLink" href="#maakteam">Dat kan hier</a>
                             </div>
+                            <!-- Tabel met de teams waar de user in zit -->
                             <div ng-if="teams.length != 0 && loaded == true">
                                 <table id="tabel-teams">
                                     <thead>
@@ -46,7 +48,8 @@
                                                 <a ng-if="team.owner == {{$user->id}}" href="#modal-verwijderteam" ng-click="setTeamToBeDeleted(team.id)" uk-toggle class="uk-icon-button trash-team-button" uk-icon="icon:trash"></a>
                                                 <a ng-if="team.owner != {{$user->id}}" ng-click="leaveTeam(team.id)" class="uk-icon-button trash-team-button" uk-icon="icon:sign-out"></a>
                                                 <a ng-if="team.owner == {{$user->id}}" href="#wijzigteam-@{{team.id}}" class="uk-icon-button navbarLink" uk-icon="icon:pencil"></a>
-                                                <a ng-if="team.owner == {{$user->id}}" href="#addmember-@{{team.id}}" id="add-member-knop" class="navbarLink" ><i class="fa fa-user-plus uk-icon-button"  aria-hidden="true"></i></a>
+                                                <a ng-if="team.owner == {{$user->id}}" href="#teamoverzicht-@{{team.id}}" id="team-overzicht-knop" class="navbarLink a-zonder-streepje"><i class="fa fa-eye uk-icon-button" aria-hidden="true"></i></a>
+                                                <a ng-if="team.owner == {{$user->id}}" href="#addmember-@{{team.id}}" id="add-member-knop" class="navbarLink a-zonder-streepje" ><i class="fa fa-user-plus uk-icon-button"  aria-hidden="true"></i></a>
                                                 <div id="modal-verwijderteam" uk-modal>
                                                     <div class="uk-modal-dialog uk-modal-body">
                                                         <h2 class="uk-modal-title">Verwijder @{{team.name}}</h2>

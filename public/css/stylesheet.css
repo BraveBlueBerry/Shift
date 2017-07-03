@@ -442,6 +442,10 @@ text-overflow: ellipsis;
     display:inline-flex;
 }
 
+.a-zonder-streepje:hover {
+    text-decoration:none;
+}
+
 hr{
     margin-left:9px;
 }

@@ -21,6 +21,7 @@
           @include('application.wijzig_uur')
           @include('application.wijzig_team')
           @include('application.add_member')
+          @include('application.team_overzicht')
       </div>
     </div>
   </body>
