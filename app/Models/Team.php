@@ -11,4 +11,8 @@ class Team extends Model
     {
         return $this->belongsToMany('App\Models\User', 'team_user', 'team', 'user');
     }
+    public function categories()
+    {
+        return $this->hasMany('App\Models\Category', 'team', 'id');
+    }
 }
