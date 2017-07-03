@@ -62,21 +62,36 @@ class CategoryController extends APIController
         if(!$team)
             return response()->json(error("Team doesn't exist "), 404);
         $user = $this->getUserByToken($request->header('token'));
+        if(!$user)
+            return response()->json(error("Token not set or not valid"), 401);
         $members = $team->members()->pluck('id')->toArray();
         $members[] = $team->owner;
         if(!in_array($user->id, $members)){
             return response()->json(error("Not part of team"), 403);
         }
         $categories = $team->categories->toArray();
-        dd($categories);
+        return response()->json($categories, 200);
     }
     public function readAll(Request $request){
-
+        $user = $this->getUserByToken($request->header('token'));
+        if(!$user)
+            return response()->json(error("Token not set or not valid"), 401);
+        $user = $this->getUserByToken($request->header('token'));
+        $categories = $user->categories->toArray();
+        return response()->json($categories, 200);
     }
     public function update(Request $request, $id){
-
+        /*$user = $this->getUserByToken($request->header('token'));
+        if(!$user)
+            return response()->json(error("Token not set or not valid"), 401);
+        $request = $this->createObjectFromArray($request->all());
+        */
+       return response()->json(error("Not implemented"), 500);
     }
     public function delete(Request $request, $id){
-
+        $user = $this->getUserByToken($request->header('token'));
+        if(!$user)
+            return response()->json(error("Token not set or not valid"), 401);
+        return response()->json(error("Not implemented"), 500);
     }
 }

@@ -14,4 +14,8 @@ class User extends Model
     {
         return $this->hasMany('App\Models\Invitation', 'user', 'id');
     }
+    public function categories()
+    {
+        return $this->hasMany('App\Models\Category', 'user', 'id');
+    }
 }

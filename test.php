@@ -1,5 +1,5 @@
 <?php
-
+/*
 function get_combinations($big_n, $n){
     $combinations = [];
 
@@ -54,3 +54,27 @@ for ($i=1; $i < 8; $i++) {
 }
 
 var_dump(get_combinations(2,3));
+*/
+
+$inputorigin = "2016-05-05";
+$input = explode('-',$inputorigin);
+if(count($input) != 3)
+    die("Invalid1");
+$length = [4,2,2];
+
+foreach($input as $key => $number){
+    if(!is_numeric($number))
+        die($number);
+    if(strlen($number) != $length[$key])
+        die("Invalid $number");
+}
+if($input[0] < 1970)
+    die("Invalid3");
+if($input[1] < 1 || $input[1] > 12)
+    die("Invalid4");
+if($input[2] < 1 || $input[2] > 31)
+    die("Invalid5");
+
+
+$input = $inputorigin . " 00:00:00";
+die($input);

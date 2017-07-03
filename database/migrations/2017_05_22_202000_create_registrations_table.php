@@ -15,8 +15,11 @@ class CreateRegistrationsTable extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('time_from');
-            $table->dateTime('time_to');
+            $table->integer('year')->unsigned();
+            $table->integer('month')->unsigned();
+            $table->integer('day')->unsigned();
+            $table->integer('hours')->unsigned();
+
             $table->integer('category')->unsigned();
             $table->string('description');
             $table->integer('status')->unsigned();
