@@ -64,11 +64,8 @@ class TeamController extends APIController
         if($team->owner != $user->id){
             return response()->json(error("User associated with token can't access resource"), 403);
         }
-        dd($request->header('token'));
         $accepted = ['name', 'colour'];
         $this->updateModelFromRequest($accepted, $team, $request);
-        print("Hello");
-        dd($request);
         return response()->json([], 200);
     }
     public function delete(Request $request, $id){

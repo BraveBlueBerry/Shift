@@ -61,7 +61,7 @@ class APIController extends Controller
         return $return;
     }
 
-    protected function updateModelFromRequest($things_to_change, $model, Request $request){
+    protected function updateModelFromRequest($things_to_change, $model, $request){
         $things_we_got = [];
         foreach($things_to_change as $attribute){
             if(isset($request->{$attribute})){

@@ -48,7 +48,7 @@
                             <div ng-if="members_active_team.length == 0 && loaded == true">
                                 <img class="uk-align-center" width="180" height="165" src="{{url('storage/logozwartwit.png')}}" alt="">
                                 Op het moment zijn er geen andere leden in jouw team. <br /> Wil je een lid toevoegen?
-                                <a class="navbarLink" href="#invite">Dat kan hier</a>
+                                <a class="navbarLink" href="#addmember-@{{active_team.id}}">Dat kan hier</a>
                             </div>
                             <div ng-if="members_active_team.length != 0 && loaded == true">
                                 <table id="tabel-members">

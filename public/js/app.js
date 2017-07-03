@@ -4,35 +4,40 @@
                     Toggle Application panes
 -------------------------------------------------------------------------------------------------------------------------------------------------------
  */
+ var ids = [];
+ function swapPage(){
+     var location = window.location + "";
+     location = location.split("#");
+     jQuery(".content_right").hide();
+     if(location.length >= 2){
+         var loc = location[1].split('-');
+         if(ids.indexOf('content_' + loc[0]) >= 0){
+             jQuery("#content_" + loc[0]).show();
+             var func = "onLoad_" + loc[0];
+             try{
+                 if(loc.length > 1)
+                     window[func](loc);
+                 else
+                     window[func]();
+             }
+             catch(err){
+
+             }
+         }
+         else{
+             jQuery('#content_landing').show();
+         }
+     } else {
+         jQuery("#content_landing").show();
+     }
+ }
 jQuery(document).ready(function(){
     // Make list of ID's
-    var ids = [];
+
     jQuery('#wrapperbb .content_right').each(function(){
         ids.push(jQuery(this).attr('id'));
     });
-    var location = window.location + "";
-    location = location.split("#");
-    if(location.length >= 2){
-        var loc = location[1].split('-');
-        if(ids.indexOf('content_' + loc[0]) >= 0){
-            jQuery("#content_" + loc[0]).show();
-            var func = "onLoad_" + loc[0];
-            try{
-                if(loc.length > 1)
-                    window[func](loc);
-                else
-                    window[func]();
-            }
-            catch(err){
-
-            }
-        }
-        else{
-            jQuery('#content_landing').show();
-        }
-    } else {
-        jQuery("#content_landing").show();
-    }
+    swapPage();
 
     jQuery(document).on('click', '.navbarIcon, .navbarLink', function() {
         if(jQuery(this).attr('href')){
@@ -182,12 +187,15 @@ app.controller('teamController', function($scope, $http) {
         $http({
             method  :   "PUT",
             url     :   API_HOST + "/team/" + active_team,
-            data    :   "team_name="+$scope.edit_team_name+"&colour="+encodeURI($scope.edit_team_colour),
+            data    :   "name="+$scope.edit_team_name+"&colour="+encodeURI($scope.edit_team_colour),
             //params: {team_name: $scope.make_team_name, colour: $scope.make_team_colour},
             headers :   {'token': getCookie('token'), 'Content-Type': 'application/x-www-form-urlencoded'},
 
         }).then(function(response){
             $scope.teamEdited = true;
+            window.location="app#teams";
+            swapPage();
+            $scope.reload();
         }, function(response){
             console.log("Couldn't edit this team");
             console.log(response);
