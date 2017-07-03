@@ -100,6 +100,7 @@ function hideUserMenu() {
  */
 var app = angular.module('Shift', []);
 var active_team;
+var member_to_be_deleted = 0;
 app.controller('menuController', function($scope, $http) {
     $scope.logoutClick = function(event) {
         $http({
@@ -112,11 +113,13 @@ app.controller('menuController', function($scope, $http) {
     }
 });
 app.controller('teamController', function($scope, $http) {
-    $scope.teams = [];
     $scope.loaded = false;
+    $scope.teams = [];
+    $scope.members_active_team = [];
     $scope.active_team = {};
     $scope.team_to_be_deleted = false;
-    $scope.members_active_team = [];
+    $scope.member_to_be_deleted = false;
+
     $scope.makeTeam = function(event) {
         $http({
             method  :   "POST",
@@ -153,6 +156,7 @@ app.controller('teamController', function($scope, $http) {
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.active_team = response.data;
+            active_team = response.data.id;
             $scope.edit_team_name = response.data.name;
             $scope.edit_team_colour = response.data.colour;
             $scope.loadMembers(team_id);
@@ -161,27 +165,27 @@ app.controller('teamController', function($scope, $http) {
         });
     }
     $scope.loadMembers = function(team_id){
+        $scope.loaded = false;
         $http({
             method  :   "GET",
             url     :   API_HOST + "/team/" + team_id + "/member",
             headers :   {'token': getCookie('token')}
         }).then(function(response){
-            console.log(response.data);
             $scope.members_active_team = response.data;
+            $scope.loaded = true;
         }, function(response){
 
         });
     }
-    $scope.editTeam = function(team_id){
+    $scope.editTeam = function(){
         $scope.teamEdited = false;
         $http({
-            method  :   "UPDATE",
-            url     :   API_HOST + "/team/" + team_id,
-            data    :   {
-                            team_name:  $scope.make_team_name,
-                            colour:     $scope.make_team_colour
-                        },
-            headers :   {'token': getCookie('token')}
+            method  :   "PUT",
+            url     :   API_HOST + "/team/" + active_team,
+            data    :   "team_name="+$scope.edit_team_name+"&colour="+encodeURI($scope.edit_team_colour),
+            //params: {team_name: $scope.make_team_name, colour: $scope.make_team_colour},
+            headers :   {'token': getCookie('token'), 'Content-Type': 'application/x-www-form-urlencoded'},
+
         }).then(function(response){
             $scope.teamEdited = true;
         }, function(response){
@@ -190,7 +194,6 @@ app.controller('teamController', function($scope, $http) {
         })
     }
     $scope.deleteTeam = function(){
-        console.log($scope.teams);
         $scope.deleted = false;
         $http({
             method  :   "DELETE",
@@ -198,19 +201,39 @@ app.controller('teamController', function($scope, $http) {
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.deleted = true;
+            $scope.reload();
         }, function(response){
             console.log("Couldn't delete this team");
             console.log(response);
         });
     }
+    $scope.deleteMember = function(){
+
+        $http({
+            method  :   "DELETE",
+            url     :   API_HOST + "/team/" + active_team + "/member/" + member_to_be_deleted,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            console.log("Deleted a member");
+        }, function(response){
+            console.log("Couldn't delete this member");
+        });
+    }
     $scope.setTeamToBeDeleted = function(team_id){
         $scope.team_to_be_deleted = team_id;
-
+    }
+    $scope.setMemberToBeDeleted = function(member){
+        $scope.member_to_be_deleted = member.id;
+        $scope.current_member = member;
+        member_to_be_deleted = member.id;
     }
 
 });
 jQuery(document).on('click', '#modal-verwijderteam .modal-button-cheat', function(){
     angular.element(jQuery('#content_teams')[0]).scope().deleteTeam();
+});
+jQuery(document).on('click', '#modal-verwijdermember .modal-button-cheat', function(){
+    angular.element(jQuery('#content_teams')[0]).scope().deleteMember();
 });
 // jQuery(document).on('click', '#modal-verwijderteam .modal-button-cheat', function(){
 //     angular.element(jQuery('#content_teams')[0]).scope().deleteTeam();

@@ -18,12 +18,12 @@
                             <div ng-if="loaded == false">
                                 <img src={{url('storage/spinner.gif')}} width="100" height="100" style="margin-top:100px;"/>
                             </div>
-                            <div ng-if="teams.length == 0 && loaded">
+                            <div ng-if="teams.length == 0 && loaded == true">
                                 <img class="uk-align-center" width="180" height="165" src="{{url('storage/logozwartwit.png')}}" alt="">
                                 Op het moment zijn er nog geen teams waarin je zit. <br /> Wil je een team toevoegen?
                                 <a class="navbarLink" href="#maakteam">Dat kan hier</a>
                             </div>
-                            <div ng-if="teams.length != 0">
+                            <div ng-if="teams.length != 0 && loaded == true">
                                 <table id="tabel-teams">
                                     <thead>
                                         <tr>
@@ -48,7 +48,7 @@
                                                         <p>Weet je zeker dat je @{{team.name}} wilt verwijderen?</p>
                                                         <p class="uk-text-right">
                                                             <button class="uk-button uk-button-default uk-modal-close" type="button">Annuleren</button>
-                                                            <button class="modal-button-cheat uk-button uk-button-danger" type="button">Verwijder</button>
+                                                            <button class="modal-button-cheat uk-button uk-modal-close uk-button-danger" type="button">Verwijder</button>
                                                         </p>
                                                     </div>
                                                 </div>
