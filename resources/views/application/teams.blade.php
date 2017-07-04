@@ -43,7 +43,7 @@
                                         <tr ng-repeat='team in teams'>
                                             <th class="truncate" style="background-color:@{{team.colour}}">@{{team.name}}</th>
                                             <td>@{{team.members}}</td>
-                                            <td>0</td>
+                                            <td>@{{team.hours}}</td>
                                             <td>
                                                 <a ng-if="team.owner == {{$user->id}}" href="#modal-verwijderteam" ng-click="setTeamToBeDeleted(team.id)" uk-toggle class="uk-icon-button trash-team-button" uk-icon="icon:trash"></a>
                                                 <a ng-if="team.owner != {{$user->id}}" ng-click="leaveTeam(team.id)" class="uk-icon-button trash-team-button" uk-icon="icon:sign-out"></a>

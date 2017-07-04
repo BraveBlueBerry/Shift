@@ -2,6 +2,7 @@
     function onLoad_overzicht(){
         angular.element(jQuery('#sort_team')[0]).scope().reload();
         angular.element(jQuery('#content_overzicht')[0]).scope().loadRegistrations();
+        angular.element(jQuery('#sort_cat')[0]).scope().loadRegistrations();
     }
 </script>
 <div id="content_overzicht" ng-controller="registrationController" class="content_right">
@@ -16,12 +17,12 @@
                             <div class="uk-width-1-4">
                                 <label id="filter-label" class="uk-form-label" for="sort_wnnr">Wanneer </label>
                                 <div id="filter-controls" class="uk-form-controls">
-                                    <select class="uk-select" id="sort_wnnr">
-                                        <option>Alles</option>
-                                        <option>Vandaag</option>
-                                        <option>Afgelopen week</option>
-                                        <option>Afgelopen 2 weken</option>
-                                        <option>Afgelopen maand</option>
+                                    <select class="uk-select" ng-model="time_select" id="sort_wnnr">
+                                        <option value="">Alles</option>
+                                        <option value="24">Afgelopen 24 uur</option>
+                                        <option value="168">Afgelopen week</option>
+                                        <option value="336">Afgelopen 2 weken</option>
+                                        <option value="732">Afgelopen maand</option>
                                     </select>
                                 </div>
                             </div>
@@ -29,11 +30,8 @@
                             <div class="uk-width-1-4">
                                 <label id="filter-label" class="uk-form-label" for="sort_cat">Categorie</label>
                                 <div id="filter-controls" class="uk-form-controls">
-                                    <select class="uk-select" id="sort_cat" ng-model="filter_cat_select" ng-change="changeFilter()">
+                                    <select class="uk-select" id="sort_cat" ng-options="cat as cat.name for cat in categories" ng-controller="registrationController" ng-model="$parent.filter_cat_select" ng-change="$parent.changeFilter()">
                                         <option value="">Alles</option>
-                                        <option>Categorie voor team</option>
-                                        <option>Woutie's Super Categorie</option>
-                                        <option>Zwart</option>
                                     </select>
                                 </div>
                             </div>
@@ -42,7 +40,7 @@
                                 <div class="uk-margin">
                                     <label id="filter-label" class="uk-form-label" for="sort_team">Team</label>
                                     <div id="filter-controls" class="uk-form-controls">
-                                        <select id="sort_team" ng-model="$parent.filter_team_select" ng-change="changeFilter()" ng-options="team as team.name for team in teams" ng-controller="teamController" class="uk-select uk-form-width-large">
+                                        <select id="sort_team" ng-model="$parent.filter_team_select" ng-change="$parent.changeFilter()" ng-options="team as team.name for team in teams" ng-controller="teamController" class="uk-select uk-form-width-large">
                                             <option value="">Alles</option>
                                             <!-- <option>Geen team</option>
                                             <option ng-repeat="team in teams">@{{team.name}}</option> -->
