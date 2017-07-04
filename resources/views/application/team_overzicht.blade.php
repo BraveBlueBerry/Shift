@@ -1,6 +1,7 @@
 <script>
     function onLoad_teamoverzicht(loc){
         angular.element(jQuery('#content_teamoverzicht')[0]).scope().loadEdit(loc[1]);
+        angular.element(jQuery('#tabel-uren2')[0]).scope().loadRegistrationsForTeam(loc[1]);
     }
 </script>
 <div id="content_teamoverzicht" ng-controller="teamController" class="content_right">
@@ -45,7 +46,7 @@
                         </div>
                     </form>
                     <!-- Tabel -->
-                    <table id="tabel-uren">
+                    <table ng-controller="registrationController" id="tabel-uren2">
                         <thead>
                             <tr>
                                 <th>Datum</th>
@@ -58,12 +59,12 @@
                         </thead>
                         <tbody>
                             <!-- empty row -->
-                            <tr>
-                                <th></th>
-                                <td></td>
-                                <td class="truncate"></td>
-                                <td class="truncate"></td>
-                                <td></td>
+                            <tr ng-repeat="registration in registrations">
+                                <th style="background-color:@{{registration.category_colour}};">@{{registration.day}} - @{{registration.month}} - @{{registration.year}}</th>
+                                <td>@{{registration.hours}}</td>
+                                <td class="truncate">@{{registration.category_name}}</td>
+                                <td class="truncate">@{{registration.description}}</td>
+                                <td>@{{registration.status}}</td>
                                 <td><a class="uk-icon-button" uk-icon="icon:trash"></a><a href="#wijziguur" class="uk-icon-button navbarLink"uk-icon="icon:pencil"></a></td>
                             </tr>
                         </tbody>

@@ -525,6 +525,28 @@ app.controller('registrationController', function($scope, $http) {
         });
     }
 
+    $scope.loadRegistrationsForTeam = function(team_id){
+        console.log(team_id);
+        $scope.loaded = false;
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/team/" + team_id + "/registration",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.registrations = response.data;
+            for(i = 0; i < $scope.registrations.length; i++){
+                $scope.getCategoryNameAndColour($scope.registrations[i].category, i);
+                if(typeof $scope.registrations[i].team == "string"){
+                    $scope.getTeamNameAndColour($scope.registrations[i].team, i);
+                }
+            }
+            console.log($scope.registrations);
+            $scope.loaded = true;
+        },function(response){
+            alert("Alle velden invullen aub");
+        });
+    }
+
     $scope.getCategoryNameAndColour = function(category_id, index) {
         $http({
             method  :   "GET",
