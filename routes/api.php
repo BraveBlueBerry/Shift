@@ -30,11 +30,6 @@ Route::post('/token', ['as' => 'post_token', 'uses' => 'TokenController@create']
 Route::get('/token/{id}', ['as' => 'get_token', 'uses' => 'TokenController@read']);
 Route::delete('/token', ['as' => 'delete_token', 'uses' => 'TokenController@delete']);
 
-/* INVITATIONS */
-Route::post('/invitation', ['as' => 'post_invitation', 'uses' => 'InvitationController@create']);
-Route::get('/invitation', ['as' => 'read_invitations', 'uses' => 'InvitationController@readAll']);
-Route::delete('/invitation', ['as' => 'delete_invitation', 'uses' => 'InvitationController@delete']);
-
 /* TEAMS */
 Route::get('/team/{id}', ['as' => 'get_team', 'uses' => 'TeamController@read']);
 Route::get('/team', ['as' => 'get_teams', 'uses' => 'TeamController@readAll']);

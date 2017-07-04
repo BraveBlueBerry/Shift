@@ -1,9 +1,10 @@
 <script>
     function onLoad_overzicht(){
         angular.element(jQuery('#sort_team')[0]).scope().reload();
+        angular.element(jQuery('#content_overzicht')[0]).scope().loadRegistrations();
     }
 </script>
-<div id="content_overzicht" class="content_right">
+<div id="content_overzicht" ng-controller="registrationController" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Overzicht uren</div>
     <div class="page-panelbb">
         <div class="page-panel-innerbb">
@@ -56,8 +57,31 @@
                             </div>
                         </div>
                     </form>
-                    <!-- tabel import-->
-                    @include('application.table.table_uren')
+                    <!-- Tabel -->
+                    <table id="tabel-uren">
+                        <thead>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Tijd</th>
+                                <th>Categorie</th>
+                                <th>Team</th>
+                                <th>Omschrijving</th>
+                                <th>Status</th>
+                                <th>Opties</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="registration in registrations">
+                                <th>@{{registration.day}} - @{{registration.month}} - @{{registration.year}}</th>
+                                <td>@{{registration.hours}}</td>
+                                <td class="truncate">@{{registration.category_name}}</td>
+                                <td class="truncate">@{{registration.team_name}}</td>
+                                <td class="truncate">@{{registration.description}}</td>
+                                <td>@{{registration.state}}</td>
+                                <td><a class="uk-icon-button" uk-icon="icon:trash"></a><a href="#wijziguur" class="uk-icon-button navbarLink"uk-icon="icon:pencil"></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
