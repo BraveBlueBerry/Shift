@@ -72,7 +72,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="registration in registrations">
-                                <th>@{{registration.day}} - @{{registration.month}} - @{{registration.year}}</th>
+                                <th style="background-color:@{{registration.category_colour}}; background-image:linear-gradient( to right, @{{registration.category_colour}}, @{{registration.team_colour}});">@{{registration.day}} - @{{registration.month}} - @{{registration.year}}</th>
                                 <td>@{{registration.hours}}</td>
                                 <td class="truncate">@{{registration.category_name}}</td>
                                 <td class="truncate">@{{registration.team_name}}</td>

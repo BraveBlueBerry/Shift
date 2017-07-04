@@ -514,9 +514,9 @@ app.controller('registrationController', function($scope, $http) {
         }).then(function(response){
             $scope.registrations = response.data;
             for(i = 0; i < $scope.registrations.length; i++){
-                $scope.getCategory($scope.registrations[i].category, i);
+                $scope.getCategoryNameAndColour($scope.registrations[i].category, i);
                 if(typeof $scope.registrations[i].team == "string"){
-                    $scope.getTeamName($scope.registrations[i].team, i);
+                    $scope.getTeamNameAndColour($scope.registrations[i].team, i);
                 }
             }
             $scope.loaded = true;
@@ -525,25 +525,27 @@ app.controller('registrationController', function($scope, $http) {
         });
     }
 
-    $scope.getCategory = function(category_id, index) {
+    $scope.getCategoryNameAndColour = function(category_id, index) {
         $http({
             method  :   "GET",
             url     :   API_HOST + "/category/" + category_id,
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.registrations[index].category_name = response.data.name;
+            $scope.registrations[index].category_colour = response.data.colour;
         },function(response){
             alert("Alle velden invullen aub");
         });
     }
 
-    $scope.getTeamName = function(team_id, index) {
+    $scope.getTeamNameAndColour = function(team_id, index) {
         $http({
             method  :   "GET",
             url     :   API_HOST + "/team/" + team_id,
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.registrations[index].team_name = response.data.name;
+            $scope.registrations[index].team_colour = response.data.colour;
         },function(response){
             alert("Alle velden invullen aub");
         });
