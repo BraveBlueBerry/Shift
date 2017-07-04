@@ -144,7 +144,7 @@ class RegistrationController extends APIController
         if(isset($request->team) && in_array('team',$can_edit)){
             $team = Team::where('id','=',$request->team)->first();
             $members = $team->members()->toArray() + [$team->owner];
-            if(!in_array($user->id, $members){
+            if(!in_array($user->id, $members)){
                 // Part of team
                 $registration->team = $team->id;
             }
@@ -152,7 +152,7 @@ class RegistrationController extends APIController
                 return response()->json(error("User is not part of that team"), 403);
             }
         }
-        if(isset($request->category && in_array('category',$can_edit))){
+        if(isset($request->category) && in_array('category',$can_edit)){
             if(isset($registration->team))
                 $category = Category::where('id','=',$request->category)->where('team','=',$registration->team)->first();
             else
