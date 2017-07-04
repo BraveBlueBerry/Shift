@@ -175,11 +175,11 @@ class RegistrationController extends APIController
         }
         if(in_array('datetime', $can_edit) && isset($request->datetime)){
             if(!$this->checkTimeString($request->datetime))
-                return response()->json(error("Datetime must of format yyyy-mm-dd"), 400);
+                return response()->json(error("Datetime must of format dd-mm-yyyy"), 400);
             $split = explode('-', $request->datetime);
-            $registration->year = $split[0];
+            $registration->year = $split[2];
             $registration->month = $split[1];
-            $registration->day = $split[2];
+            $registration->day = $split[0];
         }
         $registration->save();
         return response()->json([], 200);
@@ -209,12 +209,17 @@ class RegistrationController extends APIController
             if(strlen($number) != $length[$key])
                 return false;
         }
-        if($time[2] < 1970)
-            return false;
-        if($time[1] < 1 || $time[1] > 12)
-            return false;
+        // Day
         if($time[0] < 1 || $time[0] > 31)
             return false;
+        // Month
+        if($time[1] < 1 || $time[1] > 12)
+            return false;
+        // Year
+        if($time[2] < 1970)
+            return false;
+
+
 
         return true;
     }

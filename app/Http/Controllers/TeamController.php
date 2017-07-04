@@ -43,6 +43,12 @@ class TeamController extends APIController
             $attributes = ['id','name','owner','colour'];
             $object = $this->extractFromModel($team, $attributes);
             $object->members = count($team->members) + 1;
+            $hour_list = $team->registrations()->pluck('hours')->toArray();
+            $hours = 0;
+            foreach($hour_list as $hour){
+                $hours += (int)$hour;
+            }
+            $object->hours = $hours;
             $return[$i++] = $object;
         }
         $owned_teams = Team::where('owner', '=', $user->id)->get();
@@ -50,6 +56,12 @@ class TeamController extends APIController
             $attributes = ['id','name','owner','colour'];
             $object = $this->extractFromModel($team, $attributes);
             $object->members = count($team->members) + 1;
+            $hour_list = $team->registrations()->pluck('hours')->toArray();
+            $hours = 0;
+            foreach($hour_list as $hour){
+                $hours += (int)$hour;
+            }
+            $object->hours = $hours;
             $return[$i++] = $object;
         }
         return response()->json($return, 200);

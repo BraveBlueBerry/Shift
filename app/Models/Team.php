@@ -15,4 +15,8 @@ class Team extends Model
     {
         return $this->hasMany('App\Models\Category', 'team', 'id');
     }
+    public function registrations()
+    {
+        return $this->hasMany('App\Models\Registration', 'team', 'id');
+    }
 }

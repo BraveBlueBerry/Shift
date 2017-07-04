@@ -263,7 +263,7 @@ app.controller('teamController', function($scope, $http) {
             url     :   API_HOST + "/team/" + active_team_id + "/member/" + member_to_be_deleted,
             headers :   {'token': getCookie('token')}
         }).then(function(response){
-            console.log("Deleted a member");
+            location.reload();
         }, function(response){
             console.log("Couldn't delete this member");
         });
@@ -552,11 +552,19 @@ app.controller('registrationController', function($scope, $http) {
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.registrations = response.data;
+            var category_list = [];
             for(i = 0; i < $scope.registrations.length; i++){
                 $scope.getCategoryNameAndColour($scope.registrations[i].category, i);
+                category_list.push($scope.registrations[i].category);
                 if(typeof $scope.registrations[i].team == "string"){
                     $scope.getTeamNameAndColour($scope.registrations[i].team, i);
                 }
+            }
+            var category_list = new Set(category_list);
+            $scope.categories = [];
+            for(let cat of category_list){
+                console.log(cat);
+                $scope.getCategoryById(cat);
             }
             $scope.loaded = true;
         },function(response){
@@ -565,8 +573,9 @@ app.controller('registrationController', function($scope, $http) {
     }
 
     $scope.loadRegistrationsForTeam = function(team_id){
-        console.log(team_id);
+        //console.log(team_id);
         $scope.loaded = false;
+
         $http({
             method  :   "GET",
             url     :   API_HOST + "/team/" + team_id + "/registration",
@@ -579,7 +588,7 @@ app.controller('registrationController', function($scope, $http) {
                     $scope.getTeamNameAndColour($scope.registrations[i].team, i);
                 }
             }
-            console.log($scope.registrations);
+            //console.log($scope.registrations);
             $scope.loaded = true;
         },function(response){
             alert("Alle velden invullen aub");
@@ -606,7 +615,7 @@ app.controller('registrationController', function($scope, $http) {
         }).then(function(response){
             $scope.categories = response.data;
         },function(response){
-            alert("Alle velden invullen aub");
+
         });
     }
     $scope.getTeamCategory = function(team_id) {
@@ -616,9 +625,23 @@ app.controller('registrationController', function($scope, $http) {
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.categories = response.data;
-            console.log($scope.categories);
+            //console.log($scope.categories);
         },function(response){
-            alert("Alle velden invullen aub");
+
+        });
+    }
+    $scope.getCategoryById = function(category_id){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/category/" + category_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            var temp_c = $scope.categories;
+            temp_c.push(response.data);
+            $scope.categories = temp_c;
+            //console.log($scope.categories);
+        },function(response){
+
         });
     }
     $scope.getStatus = function(){
@@ -648,7 +671,7 @@ app.controller('registrationController', function($scope, $http) {
         //alert($scope.filter_team_select);
         if(typeof $scope.filter_team_select != undefined){
             if($scope.filter_team_select != null){
-                console.log($scope.filter_team_select.id);
+                //console.log($scope.filter_team_select.id);
                 filter.team = $scope.filter_team_select.id;
             }
             else{
@@ -668,13 +691,25 @@ app.controller('registrationController', function($scope, $http) {
         } else {
             filter.category = "";
         }
-        console.log(filter.category);
+        //console.log(filter.category);
     }
     $scope.filterRegistrations = function(item) {
-
-        if(filter.category == item.category_name || filter.category == ""){
+        if(filter.category.id == item.category || filter.category == ""){
             if(filter.team == item.team || filter.team == null){
-                return item;
+                var date_filter = jQuery("#sort_wnnr").val();
+
+                if(date_filter == 0)
+                    return item;
+                //console.log("Here!");
+                var temp = new Date();
+                var then = new Date(item.year, (parseInt(item.month)-1) , (parseInt(item.day)+1), 0,0,0,0);
+                //var then = new Date(2017, 07, 04,0,0,0,0)
+                var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(),0,0,0,0);
+                var diff = Math.abs(now-then);
+                var allowed_diff = date_filter * 3600 * 1000;
+                console.log(diff);
+                if(diff < allowed_diff)
+                    return item;
             }
         }
     }
@@ -721,9 +756,9 @@ app.controller('registrationController', function($scope, $http) {
             return;
         }
 
-        if(typeof $scope.team == "undefined" || typeof $scope.team == "null")
+        if(typeof $scope.team != "undefined" && typeof $scope.team != "null")
             data.team = $scope.team.id;
-        if(typeof $scope.status == "undefined" || typeof $scope.status == "null")
+        if(typeof $scope.status != "undefined" && typeof $scope.status != "null")
             data.status = $scope.status.id;
 
         data.uren = $scope.uren;
@@ -733,7 +768,7 @@ app.controller('registrationController', function($scope, $http) {
         if(spld[0].length == 4)
             data.datetime = spld[2] + '-' + spld[1] + '-' + spld[0];
         else
-            jQuery('#datum_gewerkt').val();
+            data.datetime = jQuery('#datum_gewerkt').val();
         data.omschrijving = $scope.desc;
 
         $http({
@@ -742,7 +777,7 @@ app.controller('registrationController', function($scope, $http) {
             data    :   data,
             headers :   {'token': getCookie('token')}
         }).then(function(response){
-            console.log(response);
+            jQuery('#overzichtKnop').trigger('click');
         });
 
     }
