@@ -392,6 +392,35 @@ setInterval(function(){
     angular.element(jQuery('#content_landing')[0]).scope().getInvite();
 }, 5000);
 
+app.controller('userController', function($scope, $http) {
+    $scope.edit_user_first_name = USER_FN;
+    $scope.edit_user_last_name = USER_LN;
+    $scope.edit_user_email = USER_EMAIL;
+
+    $scope.editAccount = function() {
+        $http({
+            method  :   "PUT",
+            url     :   API_HOST + "/user/" + USER_ID,
+            data    :   "first_name="+$scope.edit_user_first_name+"&last_name="+$scope.edit_user_last_name+"&email="+$scope.edit_user_email,
+            //params: {team_name: $scope.make_team_name, colour: $scope.make_team_colour},
+            headers :   {'token': getCookie('token'), 'Content-Type': 'application/x-www-form-urlencoded'},
+
+        }).then(function(response){
+            jQuery('#mijn-account-knop')[0].click();
+        }, function(response){
+            console.log("Couldn't edit this team");
+            console.log(response);
+        })
+    }
+
+    $scope.setUser = function(user_first_name, user_last_name, user_email) {
+        console.log(user_first_name);
+        $scope.edit_user_first_name = user_first_name;
+        $scope.edit_user_last_name = user_last_name;
+        $scope.edit_user_email = user_email;
+    }
+});
+
 app.controller('categoryController', function($scope, $http) {
 
 });

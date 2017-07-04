@@ -21,6 +21,9 @@
   <script>
       var API_HOST = '{{env("API_HOST")}}';
       var USER_ID = {{$user->id}};
+      var USER_FN = "{{$user->first_name}}";
+      var USER_LN = "{{$user->last_name}}";
+      var USER_EMAIL = "{{$user->email}}";
   </script>
   <script src="{{ URL::asset('js/common.js') }}"></script>
   <script src="{{ URL::asset('js/app.js') }}"></script>
