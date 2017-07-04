@@ -111,7 +111,7 @@ class RegistrationController extends APIController
         $request = $this->createObjectFromArray($request->all());
         if(!$user)
             return response()->json(error("No user for this token"), 401);
-        $registration = Registration::where('team','=',$id)->first();
+        $registration = Registration::where('id','=',$id)->first();
         if(!$registration)
             return response()->json(error("Registration doesn't exist"), 404);
         $team = Team::where('id', '=', $registration->team)->first();

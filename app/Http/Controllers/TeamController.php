@@ -38,18 +38,19 @@ class TeamController extends APIController
         if(!$user)
             return response()->json(error("No user for this token"), 401);
         $return = [];
+        $i = 0;
         foreach($user->teams as $team){
             $attributes = ['id','name','owner','colour'];
             $object = $this->extractFromModel($team, $attributes);
             $object->members = count($team->members) + 1;
-            $return[$team->id] = $object;
+            $return[$i++] = $object;
         }
         $owned_teams = Team::where('owner', '=', $user->id)->get();
         foreach($owned_teams as $team){
             $attributes = ['id','name','owner','colour'];
             $object = $this->extractFromModel($team, $attributes);
             $object->members = count($team->members) + 1;
-            $return[$team->id] = $object;
+            $return[$i++] = $object;
         }
         return response()->json($return, 200);
     }

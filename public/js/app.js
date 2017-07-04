@@ -162,6 +162,23 @@ app.controller('teamController', function($scope, $http) {
             alert("Alle velden invullen aub");
         });
     }
+    $scope.getOwnedTeams = function(){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/team",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            console.log(response);
+            var owned_teams = [];
+            for(var i = 0; i < response.data.length; i++){
+                if(response.data[i].owner == USER_ID){
+                    owned_teams.push(response.data[i]);
+                }
+            }
+
+            $scope.owned_teams = owned_teams;
+        });
+    }
     $scope.loadEdit = function(team_id){
         $http({
             method  :   "GET",
