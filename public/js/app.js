@@ -117,6 +117,13 @@ app.controller('menuController', function($scope, $http) {
         window.location = '/inloggen';
     }
 });
+
+/*
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+                    TEAM Controller
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
 app.controller('teamController', function($scope, $http) {
     $scope.loaded = false;
     $scope.teams = [];
@@ -275,6 +282,12 @@ jQuery(document).on('click', '#modal-verwijdermember .modal-button-cheat', funct
     angular.element(jQuery('#content_teams')[0]).scope().deleteMember();
 });
 
+/*
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+                    INVITATION Controller
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
 app.controller('invitationController', function($scope, $http) {
     $scope.team = false;
     $scope.invitations = [];
@@ -409,6 +422,12 @@ setInterval(function(){
     angular.element(jQuery('#content_landing')[0]).scope().getInvite();
 }, 5000);
 
+/*
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+                    USER Controller
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
 app.controller('userController', function($scope, $http) {
     $scope.edit_user_first_name = USER_FN;
     $scope.edit_user_last_name = USER_LN;
@@ -437,6 +456,13 @@ app.controller('userController', function($scope, $http) {
         $scope.edit_user_email = user_email;
     }
 });
+
+/*
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+                    CATEGORY Controller
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
 
 app.controller('categoryController', function($scope, $http) {
     $scope.getByID = function(category_id){
@@ -485,6 +511,58 @@ app.controller('categoryController', function($scope, $http) {
         }
     }
 });
-// jQuery(document).on('click', '#modal-verwijderteam .modal-button-cheat', function(){
-//     angular.element(jQuery('#content_teams')[0]).scope().deleteTeam();
-// });
+
+
+/*
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+                    REGISTRATION Controller
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+app.controller('registrationController', function($scope, $http) {
+    $scope.registrations = [];
+
+    $scope.loadRegistrations = function(){
+        $scope.loaded = false;
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/registration",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.registrations = response.data;
+            for(i = 0; i < $scope.registrations.length; i++){
+                $scope.getCategory($scope.registrations[i].category, i);
+                if(typeof $scope.registrations[i].team == "string"){
+                    $scope.getTeamName($scope.registrations[i].team, i);
+                }
+            }
+            $scope.loaded = true;
+        },function(response){
+            alert("Alle velden invullen aub");
+        });
+    }
+
+    $scope.getCategory = function(category_id, index) {
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/category/" + category_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.registrations[index].category_name = response.data.name;
+        },function(response){
+            alert("Alle velden invullen aub");
+        });
+    }
+
+    $scope.getTeamName = function(team_id, index) {
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/team/" + team_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.registrations[index].team_name = response.data.name;
+        },function(response){
+            alert("Alle velden invullen aub");
+        });
+    }
+});
