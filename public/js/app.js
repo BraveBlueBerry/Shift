@@ -728,7 +728,12 @@ app.controller('registrationController', function($scope, $http) {
 
         data.uren = $scope.uren;
         data.category = $scope.select_category.id;
-        data.datetime = jQuery('#datum_gewerkt').val();
+        var date = jQuery('#datum_gewerkt').val();
+        var spld = date.split('-');
+        if(spld[0].length == 4)
+            data.datetime = spld[2] + '-' + spld[1] + '-' + spld[0];
+        else
+            jQuery('#datum_gewerkt').val();
         data.omschrijving = $scope.desc;
 
         $http({
