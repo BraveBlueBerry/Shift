@@ -459,8 +459,8 @@ app.controller('categoryController', function($scope, $http) {
         else{
             $http({
                 method  :   "POST",
-                url     :   API_HOST + "/category",
-                data    :   {name: $scope.name, colour: $scope.colour, team: $scope.team},
+                url     :   API_HOST + "/team/" + $scope.team + "/category",
+                data    :   {name: $scope.name, colour: $scope.colour},
                 headers :   {'token': getCookie('token')}
             }).then(function(response){
                 console.log(response);
