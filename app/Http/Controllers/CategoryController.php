@@ -24,7 +24,7 @@ class CategoryController extends APIController
             $team = Team::where('id', '=', $request->team)->first();
             if(!$team)
                 return response()->json(error("Team doesn't exist"), 404);
-            if(!$team->owner == $user->id)
+            if($team->owner != $user->id)
                 return response()->json(error("Only owners can add categories to a team"), 403);
             $category->team = $team->id;
         }

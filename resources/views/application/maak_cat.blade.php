@@ -1,6 +1,6 @@
 <script>
     function onLoad_maakcat(){
-        angular.element(jQuery('#options_team2')[0]).scope().reload();
+        angular.element(jQuery('#options_team2')[0]).scope().getOwnedTeams();
         angular.element(jQuery('#content_maakcat')[0]).scope().get();
     }
 </script>
@@ -34,7 +34,7 @@
                                     <div class="uk-form-controls">
                                         <select id="options_team2" ng-init="none" ng-model="$parent.team" ng-controller="teamController" class="uk-select uk-form-width-large">
                                             <option ng-value="none">Geen team</option>
-                                            <option ng-repeat="team in teams" value="@{{team.id}}">@{{team.name}}</option>
+                                            <option ng-repeat="team in owned_teams" value="@{{team.id}}">@{{team.name}}</option>
                                         </select>
                                     </div>
                                 </div>
