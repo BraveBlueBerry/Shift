@@ -1,4 +1,9 @@
-<div id="content_account" class="content_right">
+<!-- <script>
+    function onLoad_account(){
+        angular.element(jQuery('#content_account')[0]).scope().setUser();
+    }
+</script> -->
+<div id="content_account" class="content_right" ng-controller="userController">
     <div class="uk-text-lead headText app-headerbb">Mijn Account</div>
     <div class="page-panelbb">
         <div class="page-panel-innerbb">
@@ -12,27 +17,27 @@
                             <a class="navbarLink" href="#wijzigww">klik hier</a>
                         </section>
                         <section class="dashboard-right-content">
-                            <form id="form-account" class="uk-form-horizontal">
+                            <form id="form-account" ng-submit="editAccount()" class="uk-form-horizontal">
                                 <fieldset class="uk-fieldset">
                                     <!-- Voornaam gebruiker -->
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="voornaam_gebruiker">Voornaam: </label>
                                         <div class="uk-form-controls">
-                                            <input id="voornaam_gebruiker" class="uk-input uk-form-blank uk-form-width-large" type="text" value="{{$user->first_name}}"/>
+                                            <input id="voornaam_gebruiker" class="uk-input uk-form-blank uk-form-width-large" ng-model="edit_user_first_name" type="text"/>
                                         </div>
                                     </div>
                                     <!-- Achternaam gebruiker -->
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="achternaam_gebruiker">Achternaam: </label>
                                         <div class="uk-form-controls">
-                                            <input id="achternaam_gebruiker" class="uk-input uk-form-blank uk-form-width-large" type="text" value="{{$user->last_name}}"/>
+                                            <input id="achternaam_gebruiker" class="uk-input uk-form-blank uk-form-width-large" ng-model="edit_user_last_name" type="text"/>
                                         </div>
                                     </div>
                                     <!-- Emailadres gebruiker -->
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="email_gebruiker">Email adres: </label>
                                         <div class="uk-form-controls">
-                                            <input id="email_gebruiker" class="uk-input uk-form-blank uk-form-width-large" type="text" value="{{$user->email}}"/>
+                                            <input id="email_gebruiker" class="uk-input uk-form-blank uk-form-width-large" ng-model="edit_user_email" type="text"/>
                                         </div>
                                     </div>
                                     <!-- Wachtwoord gebruiker -->
@@ -44,7 +49,7 @@
                                     </div>
                                     <!-- Submit knop -->
                                     <div class="uk-margin" >
-                                        <button id="submit-button" class="uk-button uk-button-default">Wijzigingen opslaan</button>
+                                        <input type="submit" id="submit-button" class="uk-button uk-button-default" value="Wijzigingen opslaan"/>
                                     </div>
                                 </fieldset>
                             </form>
