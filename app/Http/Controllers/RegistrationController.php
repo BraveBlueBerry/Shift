@@ -40,7 +40,7 @@ class RegistrationController extends APIController
             $registration->category = $request->category;
         }
         if(!$this->checkTimeString($request->datetime))
-            return response()->json(error("Datetime must of format yyyy-mm-dd"), 400);
+            return response()->json(error("Datetime must of format dd-mm-yyyy"), 400);
         $registration->user = $user->id;
         $registration->description = $request->omschrijving;
         if(isset($request->document))
@@ -48,9 +48,9 @@ class RegistrationController extends APIController
         $registration->hours = $request->uren;
 
         $split = explode('-', $request->datetime);
-        $registration->year = $split[0];
+        $registration->year = $split[2];
         $registration->month = $split[1];
-        $registration->day = $split[2];
+        $registration->day = $split[0];
         $registration->status = 1;
         if(isset($request->status)){
             $status = Status::where('id','=',$request->status)->first();
@@ -89,7 +89,7 @@ class RegistrationController extends APIController
         $user = $this->getUserByToken($request->header('token'));
         if(!$user)
             return response()->json(error("No user for this token"), 401);
-        $team = Team::where("id","=",$request->team)->first();
+        $team = Team::where("id","=",$team_id)->first();
         if(!$team)
             return response()->json(error("Team doesn't exist"), 404);
 
@@ -162,7 +162,7 @@ class RegistrationController extends APIController
             }
         }
         if(in_array('status', $can_edit) && isset($request->status)){
-            $statuses = Status::get()->toArray();
+            $statuses = Status::get()->pluck('id')->toArray();
             if(!in_array($request->status, $statuses))
                 return response()->json(error("Status doesn't exist"), 404);
             $registration->status = $request->status;
@@ -171,7 +171,7 @@ class RegistrationController extends APIController
             $registration->description = $request->omschrijving;
         }
         if(in_array('uren', $can_edit) && isset($request->uren)){
-            $registration->uren = $request->uren;
+            $registration->hours = $request->uren;
         }
         if(in_array('datetime', $can_edit) && isset($request->datetime)){
             if(!$this->checkTimeString($request->datetime))
@@ -201,7 +201,7 @@ class RegistrationController extends APIController
         $time = explode('-',$input);
         if(count($time) != 3)
             return false;
-        $length = [4,2,2];
+        $length = [2,2,4];
 
         foreach($time as $key => $number){
             if(!is_numeric($number))
@@ -209,11 +209,11 @@ class RegistrationController extends APIController
             if(strlen($number) != $length[$key])
                 return false;
         }
-        if($time[0] < 1970)
+        if($time[2] < 1970)
             return false;
         if($time[1] < 1 || $time[1] > 12)
             return false;
-        if($time[2] < 1 || $time[2] > 31)
+        if($time[0] < 1 || $time[0] > 31)
             return false;
 
         return true;

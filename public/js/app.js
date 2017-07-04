@@ -162,6 +162,22 @@ app.controller('teamController', function($scope, $http) {
             alert("Alle velden invullen aub");
         });
     }
+
+    /*$scope.getTeamSelect = function(){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/team",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            var teams = [{id:0,name:"Geen team"}];
+            for(var i = 0; i < response.data.length; i++){
+                teams.push(response.data[i]);
+            }
+            $scope.teams = teams;
+        },function(response){
+            alert("Alle velden invullen aub");
+        });
+    }*/
     $scope.getOwnedTeams = function(){
         $http({
             method  :   "GET",
@@ -481,6 +497,9 @@ app.controller('categoryController', function($scope, $http) {
             console.log(response);
         });
     }
+    $scope.getByTeam = function(team_id){
+
+    }
     $scope.submit = function(){
         if(typeof $scope.name == 'undefined'){
             alert("Vul een naam in.");
@@ -523,7 +542,8 @@ var filter = {};
     filter.category = "";
 app.controller('registrationController', function($scope, $http) {
     $scope.registrations = [];
-
+    $scope.categories = [];
+    $scope.statuses = [];
     $scope.loadRegistrations = function(){
         $scope.loaded = false;
         $http({
@@ -578,7 +598,38 @@ app.controller('registrationController', function($scope, $http) {
             alert("Alle velden invullen aub");
         });
     }
-
+    $scope.getUserCategory = function() {
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/category",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.categories = response.data;
+        },function(response){
+            alert("Alle velden invullen aub");
+        });
+    }
+    $scope.getTeamCategory = function(team_id) {
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/team/"+team_id+"/category",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.categories = response.data;
+            console.log($scope.categories);
+        },function(response){
+            alert("Alle velden invullen aub");
+        });
+    }
+    $scope.getStatus = function(){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/status",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.statuses = response.data;
+        });
+    }
     $scope.getTeamNameAndColour = function(team_id, index) {
         $http({
             method  :   "GET",
@@ -591,6 +642,7 @@ app.controller('registrationController', function($scope, $http) {
             alert("Alle velden invullen aub");
         });
     }
+
 
     $scope.changeFilter = function(){
         //alert($scope.filter_team_select);
@@ -625,5 +677,68 @@ app.controller('registrationController', function($scope, $http) {
                 return item;
             }
         }
+    }
+    $scope.load = function(){
+        $scope.getStatus();
+        $scope.getUserCategory();
+    }
+    $scope.changeTeam = function(){
+        var is_team;
+        if(typeof $scope.team != undefined){
+            if($scope.team != null){
+                is_team = true;
+            }
+            else{
+                is_team =false;
+            }
+        }
+        else{
+            is_team = false;
+        }
+        if(is_team){
+            $scope.getTeamCategory($scope.team.id);
+        }
+        else{
+            $scope.getUserCategory();
+        }
+    }
+    $scope.submit = function(){
+        var data = {};
+        if(typeof $scope.uren == "undefined" || typeof $scope.uren == "null"){
+            alert("Graag uren invullen.");
+            return;
+        }
+        if(typeof $scope.desc == "undefined" || typeof $scope.desc == "null"){
+            alert("Graag omschrijving invullen.");
+            return;
+        }
+        if(jQuery('#datum_gewerkt').val() == ""){
+            alert("Graag datum invullen.");
+            return;
+        }
+        if(typeof $scope.select_category == "undefined" || typeof $scope.select_category == "null"){
+            alert("Graag een categorie selecteren.");
+            return;
+        }
+
+        if(typeof $scope.team == "object")
+            data.team = $scope.team.id;
+        if(typeof $scope.team == "object")
+            data.status = $scope.status.id;
+
+        data.uren = $scope.uren;
+        data.category = $scope.select_category.id;
+        data.datetime = jQuery('#datum_gewerkt').val();
+        data.omschrijving = $scope.desc;
+
+        $http({
+            method  :   "POST",
+            url     :   API_HOST + "/registration",
+            data    :   data,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            console.log(response);
+        });
+
     }
 });
