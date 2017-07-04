@@ -11,27 +11,27 @@
                             Vul je oude wachtwoord in om een nieuw wachtwoord aan te maken
                         </section>
                         <section class="dashboard-right-content">
-                            <form id="form-account" class="uk-form-horizontal">
+                            <form id="form-account" ng-controller="userController" ng-submit="editPassword()" class="uk-form-horizontal">
                                 <fieldset class="uk-fieldset">
                                     <!-- Oud wachtwoord gebruiker -->
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="oudww">Oud wachtwoord: </label>
                                         <div class="uk-form-controls">
-                                            <input id="oudww" class="uk-input uk-form-width-large" type="password"/>
+                                            <input id="oudww" class="uk-input uk-form-width-large" ng-model="old_password" type="password"/>
                                         </div>
                                     </div>
                                     <!-- Nieuw wachtwoord 1 gebruiker -->
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="nieuwww">Nieuw wachtwoord: </label>
                                         <div class="uk-form-controls">
-                                            <input id="nieuwww" class="uk-input uk-form-width-large" type="password"/>
+                                            <input id="nieuwww" class="uk-input uk-form-width-large" ng-mdoel="new_password_1" type="password"/>
                                         </div>
                                     </div>
                                     <!-- Nieuw wachtwoord 2 gebruiker -->
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="nieuwwwher">Herhaal wachtwoord: </label>
                                         <div class="uk-form-controls">
-                                            <input id="nieuwwwher" class="uk-input uk-form-width-large" type="password"/>
+                                            <input id="nieuwwwher" class="uk-input uk-form-width-large" ng-mdoel="new_password_1" type="password"/>
                                         </div>
                                     </div>
                                     <!-- Submit knop -->

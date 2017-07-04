@@ -471,6 +471,10 @@ app.controller('userController', function($scope, $http) {
         $scope.edit_user_last_name = user_last_name;
         $scope.edit_user_email = user_email;
     }
+
+    $scope.editPassword = function() {
+
+    }
 });
 
 /*
@@ -515,6 +519,7 @@ app.controller('categoryController', function($scope, $http) {
                 data    :   {name: $scope.name, colour: $scope.colour},
                 headers :   {'token': getCookie('token')}
             }).then(function(response){
+                UIkit.notification(jQuery("#make-cat-btn").data());
                 console.log(response);
             });
         }
@@ -525,6 +530,7 @@ app.controller('categoryController', function($scope, $http) {
                 data    :   {name: $scope.name, colour: $scope.colour},
                 headers :   {'token': getCookie('token')}
             }).then(function(response){
+                UIkit.notification(jQuery("#make-cat-btn").data());
                 console.log(response);
             });
         }
