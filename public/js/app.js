@@ -501,7 +501,9 @@ app.controller('categoryController', function($scope, $http) {
                     REGISTRATION Controller
 -------------------------------------------------------------------------------------------------------------------------------------------------------
  */
-
+var filter = {};
+    filter.team = null;
+    filter.category = "";
 app.controller('registrationController', function($scope, $http) {
     $scope.registrations = [];
 
@@ -571,5 +573,40 @@ app.controller('registrationController', function($scope, $http) {
         },function(response){
             alert("Alle velden invullen aub");
         });
+    }
+
+    $scope.changeFilter = function(){
+        //alert($scope.filter_team_select);
+        if(typeof $scope.filter_team_select != undefined){
+            if($scope.filter_team_select != null){
+                console.log($scope.filter_team_select.id);
+                filter.team = $scope.filter_team_select.id;
+            }
+            else{
+                filter.team = null;
+            }
+        }
+        else{
+            filter.team = null;
+        }
+
+        if(typeof $scope.filter_cat_select != undefined){
+            if($scope.filter_cat_select != null){
+                filter.category = $scope.filter_cat_select;
+            } else {
+                filter.category = "";
+            }
+        } else {
+            filter.category = "";
+        }
+        console.log(filter.category);
+    }
+    $scope.filterRegistrations = function(item) {
+
+        if(filter.category == item.category_name || filter.category == ""){
+            if(filter.team == item.team || filter.team == null){
+                return item;
+            }
+        }
     }
 });

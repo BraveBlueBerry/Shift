@@ -10,14 +10,13 @@
         <div class="page-panel-innerbb">
             <div class="page-panel-content maskablebb" id="dashboard-containerbb">
                 <div id="dashboard-overviewbb" class="dashboard-sectionbb">
-                    <form class="uk-form-horizontal" style="width: 100%; margin-bottom:10px;">
+                    <form class="uk-form-horizontal" ng-controller="registrationController" ng-submit="filterRegistrations()" style="width: 100%; margin-bottom:10px;">
                         <div class="uk-grid">
+                            <!-- Dropdown voor filter op datum -->
                             <div class="uk-width-1-4">
                                 <label id="filter-label" class="uk-form-label" for="sort_wnnr">Wanneer </label>
                                 <div id="filter-controls" class="uk-form-controls">
                                     <select class="uk-select" id="sort_wnnr">
-                                        <!-- Deze opties staan niet vast, misschien moeten we juist data kiezen die gebruikt zijn in de geregistreerde uren
-                                              Datepicker van maken met opties "van" en "tot" -->
                                         <option>Alles</option>
                                         <option>Vandaag</option>
                                         <option>Afgelopen week</option>
@@ -26,33 +25,35 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- Dropdown voor filter op Categorie -->
                             <div class="uk-width-1-4">
                                 <label id="filter-label" class="uk-form-label" for="sort_cat">Categorie</label>
                                 <div id="filter-controls" class="uk-form-controls">
-                                    <select class="uk-select" id="sort_cat">
-                                        <!-- Deze opties staan niet vast, moet samengaan met de categoriën die de gebruiker aangemaakt heeft -->
-                                        <option>Alles</option>
-                                        <option>Blauw</option>
-                                        <option>Groen</option>
+                                    <select class="uk-select" id="sort_cat" ng-model="filter_cat_select" ng-change="changeFilter()">
+                                        <option value="">Alles</option>
+                                        <option>Categorie voor team</option>
+                                        <option>Woutie's Super Categorie</option>
                                         <option>Zwart</option>
                                     </select>
                                 </div>
                             </div>
+                            <!-- Dropdown voor filter op Team -->
                             <div class="uk-width-1-4">
                                 <div class="uk-margin">
                                     <label id="filter-label" class="uk-form-label" for="sort_team">Team</label>
                                     <div id="filter-controls" class="uk-form-controls">
-                                        <select id="sort_team" ng-controller="teamController" class="uk-select uk-form-width-large">
-                                            <!-- Deze opties staan niet vast, moet samengaan met de teams waar de gebruiker in zit -->
-                                            <option>Geen team</option>
-                                            <option ng-repeat="team in teams">@{{team.name}}</option>
+                                        <select id="sort_team" ng-model="$parent.filter_team_select" ng-change="changeFilter()" ng-options="team as team.name for team in teams" ng-controller="teamController" class="uk-select uk-form-width-large">
+                                            <option value="">Alles</option>
+                                            <!-- <option>Geen team</option>
+                                            <option ng-repeat="team in teams">@{{team.name}}</option> -->
                                         </select>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Submit knop | filter -->
                             <div class="uk-width-1-4">
                                 <div class="uk-margin" >
-                                    <button id="filter-button" class="uk-button uk-button-default">Filter</button>
+                                    <input type='submit' value='Filter' class="uk-button uk-button-default" />
                                 </div>
                             </div>
                         </div>
@@ -71,7 +72,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="registration in registrations">
+                            <tr ng-repeat="registration in registrations | filter: filterRegistrations">
                                 <th style="background-color:@{{registration.category_colour}}; background-image:linear-gradient( to right, @{{registration.category_colour}}, @{{registration.team_colour}});">@{{registration.day}} - @{{registration.month}} - @{{registration.year}}</th>
                                 <td>@{{registration.hours}}</td>
                                 <td class="truncate">@{{registration.category_name}}</td>
