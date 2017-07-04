@@ -1,9 +1,10 @@
 <script>
     function onLoad_maakuur(){
         angular.element(jQuery('#options_team')[0]).scope().reload();
+        angular.element(jQuery('#content_maakuur')[0]).scope().load();
     }
 </script>
-<div id="content_maakuur" class="content_right">
+<div id="content_maakuur" ng-controller="registrationController" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Nieuwe uren registratie</div>
     <div class="page-panelbb">
         <div class="page-panel-innerbb">
@@ -17,43 +18,53 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="textarea_omschrijving">Omschrijving*</label>
                                     <div class="uk-form-controls">
-                                        <textarea id="textarea_omschrijving" class="uk-textarea" rows="5" placeholder="Een korte omschrijving van de uitgevoerde werkzaamheden"></textarea>
-                                    </div>
-                                </div>
-                                <!-- Categorie -->
-                                <div class="uk-margin">
-                                    <label class="uk-form-label" for="options_cat">Categorie*</label>
-                                    <div class="uk-form-controls">
-                                        <select id="options_cat" class="uk-select uk-form-width-large">
-                                            <option>Categorie 01</option>
-                                            <option>Categorie 02</option>
-                                        </select>
+                                        <textarea id="textarea_omschrijving" ng-model="desc" class="uk-textarea" rows="5" placeholder="Een korte omschrijving van de uitgevoerde werkzaamheden"></textarea>
                                     </div>
                                 </div>
                                 <!-- Datum -->
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="datum_gewerkt">Datum*</label>
                                     <div class="uk-form-controls">
-                                        <input id="datum_gewerkt" type="date" placeholder="dd-mm-jjjj"/>
+                                        <input id="datum_gewerkt" type="date" ng-model="datetime" placeholder="dd-mm-jjjj"/>
                                     </div>
                                 </div>
                                 <!-- Hoe lang -->
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="tijd_gewerkt">Hoe lang aan gewerkt?*</label>
                                     <div class="uk-form-controls">
-                                        <input id="tijd_gewerkt" class="uk-input uk-form-width-large" type="text" placeholder="bv: 1,5"/>
+                                        <input id="tijd_gewerkt" class="uk-input uk-form-width-large" ng-model="uren" type="text" placeholder="bv: 1,5"/>
                                     </div>
                                 </div>
                                 <!-- Team -->
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="options_team">Team</label>
                                     <div class="uk-form-controls">
-                                        <select id="options_team" ng-controller="teamController" class="uk-select uk-form-width-large">
-                                            <option>Geen team</option>
-                                            <option ng-repeat="team in teams" value="@{{team.id}}">@{{team.name}}</option>
+                                        <select id="options_team" ng-options="team as team.name for team in teams" ng-controller="teamController" ng-model="$parent.team" ng-change="$parent.changeTeam()" class="uk-select uk-form-width-large">
+                                            <option value="">Geen team</option>
+                                            <!-- <option ng-repeat="team in teams" value="@{{team.id}}">@{{team.name}}</option> -->
                                         </select>
                                     </div>
                                 </div>
+                                <!-- Categorie -->
+                                <div class="uk-margin">
+                                    <label class="uk-form-label" for="options_cat">Categorie*</label>
+                                    <div class="uk-form-controls">
+                                        <select id="options_cat" ng-options="category as category.name for category in categories" ng-model="select_category" class="uk-select uk-form-width-large">
+                                            <option value="">Selecteer een categorie</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Status -->
+                                <div class="uk-margin">
+                                    <label class="uk-form-label" for="options_cat">Status*</label>
+                                    <div class="uk-form-controls">
+                                        <select id="options_cat" ng-options="s as s.name for s in statuses" ng-model="status" class="uk-select uk-form-width-large">
+                                            <option value="">Selecteer een status</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
                                 <!-- Bijlage (optioneel) -->
                                 <div class="uk-margin" >
                                     <div uk-form-custom>
@@ -66,7 +77,7 @@
                                 </div>
                                 <!-- Submit knop -->
                                 <div class="uk-margin" >
-                                    <button class="uk-button uk-button-default">Submit</button>
+                                    <button class="uk-button uk-button-default" ng-click="submit()">Submit</button>
                                 </div>
                             </fieldset>
                         </form>
