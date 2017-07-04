@@ -41,7 +41,8 @@ class UserController extends APIController
         return response()->json($return_user, 200);
     }
     public function update(Request $request, $id){
-        $user = $this->getUserByToken($request->header('token'));
+        $token = $request->header('token');
+        $user = $this->getUserByToken($token);
         $request = $this->createObjectFromArray($request->all());
         if(!$user)
             return response()->json(error("No user for this token"), 401);
@@ -61,7 +62,7 @@ class UserController extends APIController
                 return response()->json(error('This email is in use.'), 409);
             }
         }
-        $user = $this->getUserByToken($request->header('token'));
+        $user = $this->getUserByToken($token);
         foreach($things_we_got as $attribute){
             $user->{$attribute} = $request->{$attribute};
         }

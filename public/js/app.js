@@ -393,7 +393,51 @@ setInterval(function(){
 }, 5000);
 
 app.controller('categoryController', function($scope, $http) {
+    $scope.getByID = function(category_id){
 
+    };
+
+    $scope.get = function(){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/category",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            console.log(response);
+        },function(response){
+            console.log("Get owner error: ");
+            console.log(response);
+        });
+    }
+    $scope.submit = function(){
+        if(typeof $scope.name == 'undefined'){
+            alert("Vul een naam in.");
+            return;
+        }
+        if(typeof $scope.colour == 'undefined'){
+            $scope.colour = "#000000";
+        }
+        if(typeof $scope.team == "undefined"){
+            $http({
+                method  :   "POST",
+                url     :   API_HOST + "/category",
+                data    :   {name: $scope.name, colour: $scope.colour},
+                headers :   {'token': getCookie('token')}
+            }).then(function(response){
+                console.log(response);
+            });
+        }
+        else{
+            $http({
+                method  :   "POST",
+                url     :   API_HOST + "/category",
+                data    :   {name: $scope.name, colour: $scope.colour, team: $scope.team},
+                headers :   {'token': getCookie('token')}
+            }).then(function(response){
+                console.log(response);
+            });
+        }
+    }
 });
 // jQuery(document).on('click', '#modal-verwijderteam .modal-button-cheat', function(){
 //     angular.element(jQuery('#content_teams')[0]).scope().deleteTeam();

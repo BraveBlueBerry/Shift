@@ -50,7 +50,7 @@
                                     <div class="uk-form-controls">
                                         <select id="options_team" ng-controller="teamController" class="uk-select uk-form-width-large">
                                             <option>Geen team</option>
-                                            <option ng-repeat="team in teams">@{{team.name}}</option>
+                                            <option ng-repeat="team in teams" value="@{{team.id}}">@{{team.name}}</option>
                                         </select>
                                     </div>
                                 </div>
