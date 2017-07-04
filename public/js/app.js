@@ -721,9 +721,9 @@ app.controller('registrationController', function($scope, $http) {
             return;
         }
 
-        if(typeof $scope.team == "object")
+        if(typeof $scope.team == "undefined" || typeof $scope.team == "null")
             data.team = $scope.team.id;
-        if(typeof $scope.team == "object")
+        if(typeof $scope.status == "undefined" || typeof $scope.status == "null")
             data.status = $scope.status.id;
 
         data.uren = $scope.uren;
