@@ -543,7 +543,8 @@ app.controller('categoryController', function($scope, $http) {
                     REGISTRATION Controller
 -------------------------------------------------------------------------------------------------------------------------------------------------------
  */
-var filter = {};
+var filter = {},
+    registrationid = 0;
     filter.team = null;
     filter.category = "";
 app.controller('registrationController', function($scope, $http) {
@@ -592,7 +593,7 @@ app.controller('registrationController', function($scope, $http) {
     $scope.loadRegistrationsForTeam = function(team_id){
         //console.log(team_id);
         $scope.loaded = false;
-
+        $scope.getStatus();
         $http({
             method  :   "GET",
             url     :   API_HOST + "/team/" + team_id + "/registration",
@@ -601,12 +602,25 @@ app.controller('registrationController', function($scope, $http) {
             $scope.registrations = response.data;
             for(i = 0; i < $scope.registrations.length; i++){
                 $scope.getCategoryNameAndColour($scope.registrations[i].category, i);
+                $scope.getUserNameOfRegistration($scope.registrations[i].user, i)
                 if(typeof $scope.registrations[i].team == "string"){
                     $scope.getTeamNameAndColour($scope.registrations[i].team, i);
                 }
             }
+            $scope.getStatusAndUpdate();
             //console.log($scope.registrations);
             $scope.loaded = true;
+        },function(response){
+        });
+    }
+
+    $scope.getUserNameOfRegistration = function(user_id, index){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/user/" + user_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.registrations[index].user_name = response.data.first_name + " " + response.data.last_name;
         },function(response){
         });
     }
@@ -666,6 +680,20 @@ app.controller('registrationController', function($scope, $http) {
             headers :   {'token': getCookie('token')}
         }).then(function(response){
             $scope.statuses = response.data;
+        });
+    }
+    $scope.getStatusAndUpdate = function(){
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/status",
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            console.log(response);
+
+            for(var i = 0; i < $scope.registrations.length; i++){
+                $scope.registrations[i].status_name = response.data[$scope.registrations[i].status - 1].name;
+            }
+            console.log($scope.registrations);
         });
     }
     $scope.getTeamNameAndColour = function(team_id, index) {
@@ -749,7 +777,7 @@ app.controller('registrationController', function($scope, $http) {
     $scope.loadEditRegistration = function(registration_id) {
         $scope.getRegistration(registration_id);
         $scope.getUserCategory();
-
+        registrationid = registration_id;
     }
     $scope.load = function(){
         $scope.getStatus();
@@ -775,6 +803,48 @@ app.controller('registrationController', function($scope, $http) {
             $scope.getUserCategory();
         }
     }
+    $scope.updateRegistration = function(){
+        var data_tosend = {};
+        if(typeof $scope.edit_registration_hours == "undefined" || typeof $scope.edit_registration_hours == "null"){
+            alert("Graag uren invullen.");
+            return;
+        }
+        if(typeof $scope.edit_registration_description == "undefined" || typeof $scope.edit_registration_description == "null"){
+            alert("Graag omschrijving invullen.");
+            return;
+        }
+        if(jQuery('#datum_gewerkt_edit').val() == ""){
+            alert("Graag datum invullen.");
+            return;
+        }
+        if(typeof $scope.select_edit_category == "undefined" || typeof $scope.select_edit_category == "null"){
+            alert("Graag een categorie selecteren.");
+            return;
+        }
+        if(typeof $scope.edit_team != "undefined" && typeof $scope.edit_team != "null")
+            data_tosend.edit_team = $scope.edit_team.id;
+        if(typeof $scope.edit_status != "undefined" && typeof $scope.edit_status != "null")
+            data_tosend.edit_status = $scope.edit_status.id;
+
+        data_tosend.uren = $scope.edit_registration_hours;
+        data_tosend.category = $scope.select_edit_category.id;
+        var date_edit = jQuery('#datum_gewerkt_edit').val();
+        var spld_edit = date_edit.split('-');
+        if(spld_edit[0].length == 4)
+            data_tosend.datetime = spld_edit[2] + '-' + spld_edit[1] + '-' + spld_edit[0];
+        else
+            data_tosend.datetime = jQuery('#datum_gewerkt_edit').val();
+
+        data_tosend.omschrijving = $scope.edit_registration_description;
+        $http({
+            method  :   "PUT",
+            url     :   API_HOST + "/registration/" + registrationid,
+            data    :   data_tosend,
+            headers :   {'token': getCookie('token'), 'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function(response){
+            jQuery('#overzichtKnop').trigger('click');
+        });
+    }
     $scope.submit = function(){
         var data = {};
         if(typeof $scope.uren == "undefined" || typeof $scope.uren == "null"){
@@ -794,7 +864,7 @@ app.controller('registrationController', function($scope, $http) {
             return;
         }
 
-        if(typeof $scope.team != "undefined" && typeof $scope.team != "null")
+        if(typeof $scope.team != "undefined" && $scope.team != null)
             data.team = $scope.team.id;
         if(typeof $scope.status != "undefined" && typeof $scope.status != "null")
             data.status = $scope.status.id;

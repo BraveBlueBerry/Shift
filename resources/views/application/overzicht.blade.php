@@ -48,12 +48,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Submit knop | filter -->
-                            <div class="uk-width-1-4">
-                                <div class="uk-margin" >
-                                    <input type='submit' value='Filter' class="uk-button uk-button-default" />
-                                </div>
-                            </div>
                         </div>
                     </form>
                     <!-- Tabel -->

@@ -30,7 +30,7 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="datum_gewerkt">Datum*</label>
                                         <div class="uk-form-controls">
-                                            <input id="datum_gewerkt" ng-model="edit_registration_date" type="date" placeholder="dd-mm-jjjj"/>
+                                            <input id="datum_gewerkt_edit" ng-model="edit_registration_date" type="date" placeholder="dd-mm-jjjj"/>
                                         </div>
                                     </div>
                                     <!-- Hoe lang -->
@@ -44,7 +44,7 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="options_edituur_team2">Team</label>
                                         <div class="uk-form-controls">
-                                            <select id="options_edituur_team2" ng-options="team as team.name for team in teams" ng-controller="teamController" ng-model="$parent.team" ng-change="$parent.changeTeam()" class="uk-select uk-form-width-large">
+                                            <select id="options_edituur_team2" ng-options="team as team.name for team in teams" ng-controller="teamController" ng-model="$parent.edit_team" ng-change="$parent.changeTeam()" class="uk-select uk-form-width-large">
                                                 <option value="">Geen team</option>
                                             </select>
                                         </div>
@@ -53,8 +53,17 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="options_cat">Categorie*</label>
                                         <div class="uk-form-controls">
-                                            <select id="options_cat" ng-options="category as category.name for category in categories" ng-model="select_category" class="uk-select uk-form-width-large">
+                                            <select id="options_cat" ng-options="category as category.name for category in categories" ng-model="select_edit_category" class="uk-select uk-form-width-large">
                                                 <option value="">Selecteer een categorie</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="options_cat">Status*</label>
+                                        <div class="uk-form-controls">
+                                            <select id="options_cat" ng-options="s as s.name for s in statuses" ng-model="edit_status" class="uk-select uk-form-width-large">
+                                                <option value="">Selecteer een status</option>
                                             </select>
                                         </div>
                                     </div>
@@ -70,7 +79,7 @@
                                     </div>
                                     <!-- Submit knop -->
                                     <div class="uk-margin" >
-                                        <button id="submit-button" class="uk-button uk-button-default">Wijzigingen opslaan</button>
+                                        <button id="submit-button" ng-click="updateRegistration(registration.id)" class="uk-button uk-button-default">Wijzigingen opslaan</button>
                                     </div>
                                 </fieldset>
                             </form>
