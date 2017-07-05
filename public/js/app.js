@@ -568,7 +568,6 @@ app.controller('registrationController', function($scope, $http) {
             }
             $scope.loaded = true;
         },function(response){
-            alert("Alle velden invullen aub");
         });
     }
 
@@ -591,7 +590,6 @@ app.controller('registrationController', function($scope, $http) {
             //console.log($scope.registrations);
             $scope.loaded = true;
         },function(response){
-            alert("Alle velden invullen aub");
         });
     }
 
@@ -604,7 +602,6 @@ app.controller('registrationController', function($scope, $http) {
             $scope.registrations[index].category_name = response.data.name;
             $scope.registrations[index].category_colour = response.data.colour;
         },function(response){
-            alert("Alle velden invullen aub");
         });
     }
     $scope.getUserCategory = function() {
