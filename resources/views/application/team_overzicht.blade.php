@@ -51,6 +51,7 @@
                             <tr>
                                 <th>Datum</th>
                                 <th>Tijd</th>
+                                <th>Wie</th>
                                 <th>Categorie</th>
                                 <th>Omschrijving</th>
                                 <th>Status</th>
@@ -62,6 +63,7 @@
                             <tr ng-repeat="registration in registrations">
                                 <th style="background-color:@{{registration.category_colour}};">@{{registration.day}} - @{{registration.month}} - @{{registration.year}}</th>
                                 <td>@{{registration.hours}}</td>
+                                <td>@{{registration.user}}</td>
                                 <td class="truncate">@{{registration.category_name}}</td>
                                 <td class="truncate">@{{registration.description}}</td>
                                 <td>@{{registration.status}}</td>

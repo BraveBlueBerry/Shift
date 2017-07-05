@@ -550,6 +550,18 @@ app.controller('registrationController', function($scope, $http) {
     $scope.registrations = [];
     $scope.categories = [];
     $scope.statuses = [];
+    $scope.deleteRegistration = function(registration_id){
+        $http({
+            method  :   "DELETE",
+            url     :   API_HOST + "/registration/" + registration_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            location.reload();
+        }, function(response){
+            console.log("Couldn't delete this registration");
+            console.log(response);
+        });
+    }
     $scope.loadRegistrations = function(){
         $scope.loaded = false;
         $http({
