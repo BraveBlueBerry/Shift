@@ -719,6 +719,29 @@ app.controller('registrationController', function($scope, $http) {
             }
         }
     }
+    $scope.getRegistration = function(registration_id) {
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/registration/" + registration_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.edit_registration_description = response.data.description;
+            $scope.registration_date_year = response.data.year;
+            $scope.registration_date_month = response.data.month;
+            $scope.registration_date_day = response.data.day;
+            $scope.edit_registration_date = $scope.registration_date_year + "-" + $scope.registration_date_month + "-" + $scope.registration_date_day;
+            $scope.edit_registration_hours = response.data.hours;
+            $scope.edit_registration_team = response.data.team;
+
+        },function(response){
+            alert("Couldn't get the registration");
+        });
+    }
+    $scope.loadEditRegistration = function(registration_id) {
+        $scope.getRegistration(registration_id);
+        $scope.getUserCategory();
+
+    }
     $scope.load = function(){
         $scope.getStatus();
         $scope.getUserCategory();
@@ -785,6 +808,5 @@ app.controller('registrationController', function($scope, $http) {
         }).then(function(response){
             jQuery('#overzichtKnop').trigger('click');
         });
-
     }
 });
