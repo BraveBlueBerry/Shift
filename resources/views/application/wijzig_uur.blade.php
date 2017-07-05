@@ -1,4 +1,10 @@
-<div id="content_wijziguur" class="content_right">
+<script>
+    function onLoad_wijziguur(loc){
+        angular.element(jQuery('#options_edituur_team2')[0]).scope().reload();
+        angular.element(jQuery('#content_wijziguur')[0]).scope().loadEditRegistration(loc[1]);
+    }
+</script>
+<div id="content_wijziguur" ng-controller="registrationController" class="content_right">
     <div class="uk-text-lead headText app-headerbb">Registratie aanpassen</div>
     <div class="page-panelbb">
         <div class="page-panel-innerbb">
@@ -17,40 +23,38 @@
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="textarea_omschrijving">Omschrijving*</label>
                                         <div class="uk-form-controls">
-                                            <textarea id="textarea_omschrijving" class="uk-textarea uk-form-width-large" rows="5" placeholder="Een korte omschrijving van de uitgevoerde werkzaamheden"></textarea>
-                                        </div>
-                                    </div>
-                                    <!-- Categorie -->
-                                    <div class="uk-margin">
-                                        <label class="uk-form-label" for="options_cat">Categorie*</label>
-                                        <div class="uk-form-controls">
-                                            <select id="options_cat" class="uk-select uk-form-width-large">
-                                                <option>Categorie 01</option>
-                                                <option>Categorie 02</option>
-                                            </select>
+                                            <textarea id="textarea_omschrijving" ng-model='edit_registration_description' class="uk-textarea uk-form-width-large" rows="5" placeholder="Een korte omschrijving van de uitgevoerde werkzaamheden"></textarea>
                                         </div>
                                     </div>
                                     <!-- Datum -->
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="datum_gewerkt">Datum*</label>
                                         <div class="uk-form-controls">
-                                            <input id="datum_gewerkt" type="date" placeholder="dd-mm-jjjj"/>
+                                            <input id="datum_gewerkt" ng-model="edit_registration_date" type="date" placeholder="dd-mm-jjjj"/>
                                         </div>
                                     </div>
                                     <!-- Hoe lang -->
                                     <div class="uk-margin">
                                         <label class="uk-form-label" for="tijd_gewerkt">Hoe lang aan gewerkt?*</label>
                                         <div class="uk-form-controls">
-                                            <input id="tijd_gewerkt" class="uk-input uk-form-width-large" type="text" placeholder="bv: 1,5"/>
+                                            <input id="tijd_gewerkt" ng-model="edit_registration_hours" class="uk-input uk-form-width-large" type="text" placeholder="bv: 1,5"/>
                                         </div>
                                     </div>
-                                    <!-- Team (optioneel) -->
+                                    <!-- Team -->
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="options_team">Team</label>
+                                        <label class="uk-form-label" for="options_edituur_team2">Team</label>
                                         <div class="uk-form-controls">
-                                            <select id="options_team" class="uk-select uk-form-width-large">
-                                                <option>Team 01</option>
-                                                <option>Team 02</option>
+                                            <select id="options_edituur_team2" ng-options="team as team.name for team in teams" ng-controller="teamController" ng-model="$parent.team" ng-change="$parent.changeTeam()" class="uk-select uk-form-width-large">
+                                                <option value="">Geen team</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Categorie -->
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="options_cat">Categorie*</label>
+                                        <div class="uk-form-controls">
+                                            <select id="options_cat" ng-options="category as category.name for category in categories" ng-model="select_category" class="uk-select uk-form-width-large">
+                                                <option value="">Selecteer een categorie</option>
                                             </select>
                                         </div>
                                     </div>

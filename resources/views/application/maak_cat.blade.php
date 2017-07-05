@@ -40,7 +40,7 @@
                                 </div>
                                 <!-- Submit knop -->
                                 <div class="uk-margin" >
-                                    <button ng-click="submit()" class="uk-button uk-button-default">Submit</button>
+                                    <button ng-click="submit()" id="make-cat-btn" data-message="Categorie aangemaakt" data-status="success" class="uk-button uk-button-default">Submit</button>
                                 </div>
                             </fieldset>
                         </form>

@@ -471,6 +471,10 @@ app.controller('userController', function($scope, $http) {
         $scope.edit_user_last_name = user_last_name;
         $scope.edit_user_email = user_email;
     }
+
+    $scope.editPassword = function() {
+
+    }
 });
 
 /*
@@ -515,6 +519,7 @@ app.controller('categoryController', function($scope, $http) {
                 data    :   {name: $scope.name, colour: $scope.colour},
                 headers :   {'token': getCookie('token')}
             }).then(function(response){
+                UIkit.notification(jQuery("#make-cat-btn").data());
                 console.log(response);
             });
         }
@@ -525,6 +530,7 @@ app.controller('categoryController', function($scope, $http) {
                 data    :   {name: $scope.name, colour: $scope.colour},
                 headers :   {'token': getCookie('token')}
             }).then(function(response){
+                UIkit.notification(jQuery("#make-cat-btn").data());
                 console.log(response);
             });
         }
@@ -544,6 +550,18 @@ app.controller('registrationController', function($scope, $http) {
     $scope.registrations = [];
     $scope.categories = [];
     $scope.statuses = [];
+    $scope.deleteRegistration = function(registration_id){
+        $http({
+            method  :   "DELETE",
+            url     :   API_HOST + "/registration/" + registration_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            location.reload();
+        }, function(response){
+            console.log("Couldn't delete this registration");
+            console.log(response);
+        });
+    }
     $scope.loadRegistrations = function(){
         $scope.loaded = false;
         $http({
@@ -710,6 +728,29 @@ app.controller('registrationController', function($scope, $http) {
             }
         }
     }
+    $scope.getRegistration = function(registration_id) {
+        $http({
+            method  :   "GET",
+            url     :   API_HOST + "/registration/" + registration_id,
+            headers :   {'token': getCookie('token')}
+        }).then(function(response){
+            $scope.edit_registration_description = response.data.description;
+            $scope.registration_date_year = response.data.year;
+            $scope.registration_date_month = response.data.month;
+            $scope.registration_date_day = response.data.day;
+            $scope.edit_registration_date = $scope.registration_date_year + "-" + $scope.registration_date_month + "-" + $scope.registration_date_day;
+            $scope.edit_registration_hours = response.data.hours;
+            $scope.edit_registration_team = response.data.team;
+
+        },function(response){
+            alert("Couldn't get the registration");
+        });
+    }
+    $scope.loadEditRegistration = function(registration_id) {
+        $scope.getRegistration(registration_id);
+        $scope.getUserCategory();
+
+    }
     $scope.load = function(){
         $scope.getStatus();
         $scope.getUserCategory();
@@ -776,6 +817,5 @@ app.controller('registrationController', function($scope, $http) {
         }).then(function(response){
             jQuery('#overzichtKnop').trigger('click');
         });
-
     }
 });

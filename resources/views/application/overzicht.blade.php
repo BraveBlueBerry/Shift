@@ -77,7 +77,7 @@
                                 <td class="truncate">@{{registration.team_name}}</td>
                                 <td class="truncate">@{{registration.description}}</td>
                                 <td>@{{registration.state}}</td>
-                                <td><a class="uk-icon-button" uk-icon="icon:trash"></a><a href="#wijziguur" class="uk-icon-button navbarLink"uk-icon="icon:pencil"></a></td>
+                                <td><a ng-click="deleteRegistration(registration.id)" class="uk-icon-button" uk-icon="icon:trash"></a><a href="#wijziguur-@{{registration.id}}" class="uk-icon-button navbarLink"uk-icon="icon:pencil"></a></td>
                             </tr>
                         </tbody>
                     </table>
